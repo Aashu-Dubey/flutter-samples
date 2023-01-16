@@ -16,14 +16,11 @@ class HCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
-        // mainAxisSize: MainAxisSize.min,
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              // runSpacing: 8,
               children: [
                 Text(
                   section.title,

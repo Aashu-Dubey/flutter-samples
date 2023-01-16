@@ -20,13 +20,30 @@ class _SideMenuState extends State<SideMenu> {
   String _selectedMenu = MenuItemModel.menuItems[0].title;
   bool _isDarkMode = false;
 
-  // late SMIBool homeIcon;
+  void onThemeRiveIconInit(artboard) {
+    final controller = StateMachineController.fromArtboard(
+        artboard, _themeMenuIcon[0].riveIcon.stateMachine);
+    artboard.addController(controller!);
+    _themeMenuIcon[0].riveIcon.status =
+        controller.findInput<bool>("active") as SMIBool;
+  }
+
+  void onMenuPress(MenuItemModel menu) {
+    setState(() {
+      _selectedMenu = menu.title;
+    });
+  }
+
+  void onThemeToggle(value) {
+    setState(() {
+      _isDarkMode = value;
+    });
+    _themeMenuIcon[0].riveIcon.status!.change(value);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return /*Scaffold(
-      body:*/
-        Container(
+    return Container(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).padding.top,
           bottom: MediaQuery.of(context).padding.bottom - 60),
@@ -36,10 +53,7 @@ class _SideMenuState extends State<SideMenu> {
         color: RiveAppTheme.background2,
         borderRadius: BorderRadius.circular(30),
       ),
-      child: /*SafeArea(
-        maintainBottomViewPadding: true,
-        child:*/
-          Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -76,115 +90,49 @@ class _SideMenuState extends State<SideMenu> {
               ],
             ),
           ),
-
           MenuButtonSection(
               title: "BROWSE",
               selectedMenu: _selectedMenu,
               menuIcons: _browseMenuIcons,
-              onMenuPress: (menu) {
-                setState(() {
-                  _selectedMenu = menu.title;
-                });
-              }),
-
+              onMenuPress: onMenuPress),
           MenuButtonSection(
               title: "HISTORY",
               selectedMenu: _selectedMenu,
               menuIcons: _historyMenuIcons,
-              onMenuPress: (menu) {
-                setState(() {
-                  _selectedMenu = menu.title;
-                });
-              }),
-
-          // Padding(
-          //   padding: const EdgeInsets.only(
-          //       left: 24, right: 24, top: 40, bottom: 8),
-          //   child: Text(
-          //     "HISTORY",
-          //     style: TextStyle(
-          //         color: Colors.white.withOpacity(0.7),
-          //         fontSize: 15,
-          //         fontFamily: "Inter",
-          //         fontWeight: FontWeight.w600),
-          //   ),
-          // ),
-          // Container(
-          //   margin: const EdgeInsets.all(8),
-          //   child: Column(
-          //     children: [
-          //       for (var menu in _historyMenuIcons) ...[
-          //         Divider(
-          //             color: Colors.white.withOpacity(0.1),
-          //             thickness: 1,
-          //             height: 1,
-          //             indent: 16,
-          //             endIndent: 16),
-          //         MenuRow(
-          //           menu: menu,
-          //           selectedMenu: _selectedMenu,
-          //           onPress: () {
-          //             setState(() {
-          //               _selectedMenu = menu.title;
-          //             });
-          //           },
-          //         ),
-          //       ]
-          //     ],
-          //   ),
-          // ),
+              onMenuPress: onMenuPress),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 32,
-                  height: 32,
-                  child: Opacity(
-                    opacity: 0.6,
-                    child: RiveAnimation.asset(
-                      app_assets.iconsRiv,
-                      stateMachines: [_themeMenuIcon[0].riveIcon.stateMachine],
-                      artboard: _themeMenuIcon[0].riveIcon.artboard,
-                      // fit: BoxFit.cover,
-                      // controllers: [_chatIconController],
-                      onInit: (artboard) {
-                        final controller = StateMachineController.fromArtboard(
-                            artboard, _themeMenuIcon[0].riveIcon.stateMachine);
-                        artboard.addController(controller!);
-                        _themeMenuIcon[0].riveIcon.status =
-                            controller.findInput<bool>("active") as SMIBool;
-                      },
-                    ),
+            child: Row(children: [
+              SizedBox(
+                width: 32,
+                height: 32,
+                child: Opacity(
+                  opacity: 0.6,
+                  child: RiveAnimation.asset(
+                    app_assets.iconsRiv,
+                    stateMachines: [_themeMenuIcon[0].riveIcon.stateMachine],
+                    artboard: _themeMenuIcon[0].riveIcon.artboard,
+                    onInit: onThemeRiveIconInit,
                   ),
                 ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Text(
-                    _themeMenuIcon[0].title,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontFamily: "Inter",
-                        fontWeight: FontWeight.w600),
-                  ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Text(
+                  _themeMenuIcon[0].title,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.w600),
                 ),
-                CupertinoSwitch(
-                    value: _isDarkMode,
-                    onChanged: (value) {
-                      setState(() {
-                        _isDarkMode = value;
-                      });
-                      _themeMenuIcon[0].riveIcon.status!.change(value);
-                    }),
-              ],
-            ),
+              ),
+              CupertinoSwitch(value: _isDarkMode, onChanged: onThemeToggle),
+            ]),
           )
         ],
       ),
-      // ),
-      // ),
     );
   }
 }

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter_samples/rive_app/models/menu_item.dart';
 import 'package:flutter_samples/rive_app/assets.dart' as app_assets;
@@ -20,15 +20,21 @@ class MenuRow extends StatelessWidget {
     menu.riveIcon.status = controller.findInput<bool>("active") as SMIBool;
   }
 
+  void onMenuPressed() {
+    if (selectedMenu != menu.title) {
+      onMenuPress!();
+      menu.riveIcon.status!.change(true);
+      Future.delayed(const Duration(seconds: 1), () {
+        menu.riveIcon.status!.change(false);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        /*Positioned.fill(
-                              top: 0,
-                                bottom: 0,
-                                // top: -4,
-                                child:*/
+        // The menu button background that animates as we click on it
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           width: selectedMenu == menu.title ? 288 - 16 : 0,
@@ -39,11 +45,11 @@ class MenuRow extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        // ),
 
         CupertinoButton(
           padding: const EdgeInsets.all(12),
           pressedOpacity: 1, // disable touch effect
+          onPressed: onMenuPressed,
           child: Row(
             children: [
               SizedBox(
@@ -55,8 +61,6 @@ class MenuRow extends StatelessWidget {
                     app_assets.iconsRiv,
                     stateMachines: [menu.riveIcon.stateMachine],
                     artboard: menu.riveIcon.artboard,
-                    // fit: BoxFit.cover,
-                    // controllers: [_chatIconController],
                     onInit: _onMenuIconInit,
                   ),
                 ),
@@ -72,16 +76,6 @@ class MenuRow extends StatelessWidget {
               )
             ],
           ),
-          onPressed: () {
-            /*setState(() {
-              selectedMenu = menu.title;
-            });*/
-            onMenuPress!();
-            menu.riveIcon.status!.change(true);
-            Future.delayed(const Duration(seconds: 2), () {
-              menu.riveIcon.status!.change(false);
-            });
-          },
         ),
       ],
     );

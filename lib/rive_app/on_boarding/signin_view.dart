@@ -7,7 +7,6 @@ import 'package:flutter_samples/rive_app/assets.dart' as app_assets;
 class SignInView extends StatefulWidget {
   const SignInView({Key? key, this.closeModal}) : super(key: key);
 
-  // final bool showModal;
   final Function? closeModal;
 
   @override
@@ -18,11 +17,8 @@ class _SignInViewState extends State<SignInView> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
 
-  // late RiveAnimationController _loadingAnimController;
   late SMITrigger _successAnim;
   late SMITrigger _errorAnim;
-
-  // late SMITrigger resetAnim;
   late SMITrigger _confettiAnim;
 
   bool _isLoading = false;
@@ -40,7 +36,6 @@ class _SignInViewState extends State<SignInView> {
     artboard.addController(controller!);
     _successAnim = controller.findInput<bool>("Check") as SMITrigger;
     _errorAnim = controller.findInput<bool>("Error") as SMITrigger;
-    // resetAnim = controller.findInput<bool>("Reset") as SMITrigger;
   }
 
   void _onConfettiRiveInit(Artboard artboard) {
@@ -56,20 +51,22 @@ class _SignInViewState extends State<SignInView> {
       _isLoading = true;
     });
 
-    bool isEmailNotEmpty = _emailController.text.trim().isNotEmpty;
+    bool isEmailValid = _emailController.text.trim().isNotEmpty;
+    bool isPassValid = _passController.text.trim().isNotEmpty;
+    bool isValid = isEmailValid && isPassValid;
 
     Future.delayed(const Duration(seconds: 1), () {
-      isEmailNotEmpty ? _successAnim.fire() : _errorAnim.fire();
+      isValid ? _successAnim.fire() : _errorAnim.fire();
     });
 
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         _isLoading = false;
       });
-      if (isEmailNotEmpty) _confettiAnim.fire();
+      if (isValid) _confettiAnim.fire();
     });
 
-    if (isEmailNotEmpty) {
+    if (isValid) {
       Future.delayed(const Duration(seconds: 4), () {
         widget.closeModal!();
         _emailController.text = "";
@@ -87,20 +84,13 @@ class _SignInViewState extends State<SignInView> {
           child: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
             child: Stack(
-              // clipBehavior: Clip.none,
               children: [
-                /*AnimatedPositioned(
-                  duration: Duration(seconds: 1),
-                  top: widget.showModal ? -50 : 0,
-                  child:*/
                 Container(
                   constraints: const BoxConstraints(maxWidth: 600),
-                  // alignment: Alignment.center,
                   margin: const EdgeInsets.all(16),
                   padding: const EdgeInsets.all(1),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    // border: Border.all(),
                     gradient: LinearGradient(
                       colors: [Colors.white.withOpacity(0.8), Colors.white10],
                     ),
@@ -119,17 +109,12 @@ class _SignInViewState extends State<SignInView> {
                               offset: const Offset(0, 30),
                               blurRadius: 30)
                         ],
-                        // gradient: LinearGradient(colors: [Colors.black, Colors.redAccent]),
                         color: CupertinoColors.secondarySystemBackground,
                         // This kind of give the background iOS style "Frosted Glass" effect,
                         // it works for this particular color, might not for other
                         backgroundBlendMode: BlendMode.luminosity),
-                    // child: Padding(
-                    //   padding: EdgeInsets.all(30),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      // alignment: WrapAlignment.center,
-                      // runSpacing: 24,
                       children: [
                         const Text(
                           "Sign In",
@@ -199,11 +184,7 @@ class _SignInViewState extends State<SignInView> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                // Padding(
-                                //   padding: EdgeInsets.only(right: 4),
-                                //   child:
-                                  Icon(Icons.arrow_forward_rounded),
-                                // ),
+                                Icon(Icons.arrow_forward_rounded),
                                 SizedBox(width: 4),
                                 Text(
                                   "Sign In",
@@ -256,16 +237,13 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ],
                     ),
-                    // ),
                   ),
                 ),
-                // ),
 
                 Positioned.fill(
                   child: IgnorePointer(
                     ignoring: true,
                     child: Stack(
-                      // mainAxisAlignment: MainAxisAlignment.center,
                       alignment: Alignment.center,
                       children: [
                         if (_isLoading)
@@ -325,7 +303,6 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                       onPressed: () {
-                        // Navigator.of(context, rootNavigator: true).pop();
                         widget.closeModal!();
                       },
                     ),

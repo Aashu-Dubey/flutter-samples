@@ -12,7 +12,6 @@ class TabItem {
   String stateMachine;
   String artboard;
   late SMIBool? status;
-  // RiveIcon riveIcon;
 
   static List<TabItem> tabItemsList = [
     TabItem(stateMachine: "CHAT_Interactivity", artboard: "CHAT"),
@@ -22,16 +21,3 @@ class TabItem {
     TabItem(stateMachine: "USER_Interactivity", artboard: "USER"),
   ];
 }
-
-/*
-class RiveIcon {
-  RiveIcon({
-    this.stateMachine = "",
-    this.artboard = "",
-    this.status,
-  });
-
-  String stateMachine;
-  String artboard;
-  late SMIBool? status;
-}*/

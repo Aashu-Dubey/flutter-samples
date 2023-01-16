@@ -2,35 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_samples/rive_app/models/courses.dart';
 
-class VCard extends StatelessWidget {
-  VCard({Key? key, required this.course}) : super(key: key) {
-    avatars.shuffle();
-  }
+class VCard extends StatefulWidget {
+  const VCard({Key? key, required this.course}) : super(key: key);
 
   final CourseModel course;
+
+  @override
+  State<VCard> createState() => _VCardState();
+}
+
+class _VCardState extends State<VCard> {
   final avatars = [4, 5, 6];
+
+  @override
+  void initState() {
+    avatars.shuffle();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(maxWidth: 260, maxHeight: 310),
-      // width: 260,
-      // height: 310,
       padding: const EdgeInsets.all(30),
-      // margin: const EdgeInsets.all(10), // Spacing in list
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [course.color, course.color.withOpacity(0.5)],
+            colors: [widget.course.color, widget.course.color.withOpacity(0.5)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
         boxShadow: [
           BoxShadow(
-            color: course.color.withOpacity(0.3),
+            color: widget.course.color.withOpacity(0.3),
             blurRadius: 8,
             offset: const Offset(0, 12),
           ),
           BoxShadow(
-            color: course.color.withOpacity(0.3),
+            color: widget.course.color.withOpacity(0.3),
             blurRadius: 2,
             offset: const Offset(0, 1),
           )
@@ -42,42 +49,28 @@ class VCard extends StatelessWidget {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            // runSpacing: 8,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Row(
-              //   children: [
               Container(
                 constraints: const BoxConstraints(maxWidth: 170),
                 child: Text(
-                  course.title,
+                  widget.course.title,
                   style: const TextStyle(
-                      fontSize: 24,
-                      fontFamily: "Poppins",
-                      // fontWeight: FontWeight.w900,
-                      color: Colors.white),
+                      fontSize: 24, fontFamily: "Poppins", color: Colors.white),
                 ),
               ),
-              // Spacer(),
-              // Image.asset("assets/images/topics/topic_1.png"),
-              //   ],
-              // ),
               const SizedBox(height: 8),
-              /*Flexible(
-                // fit: FlexFit.loose,
-                child:*/
               Text(
-                course.subtitle!,
+                widget.course.subtitle!,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 softWrap: false,
                 style: TextStyle(
                     color: Colors.white.withOpacity(0.7), fontSize: 15),
               ),
-              // ),
               const SizedBox(height: 8),
               Text(
-                course.caption.toUpperCase(),
+                widget.course.caption.toUpperCase(),
                 style: const TextStyle(
                     fontSize: 13,
                     fontFamily: "Inter",
@@ -85,13 +78,7 @@ class VCard extends StatelessWidget {
                     color: Colors.white),
               ),
               const Spacer(),
-
-              // () {
-              //   avatars.shuffle();
-              //   return
               Wrap(
-                // mainAxisSize: MainAxisSize.min,
-                // direction: Axis.horizontal,
                 spacing: 8,
                 children: avatars
                     .mapIndexed(
@@ -109,16 +96,10 @@ class VCard extends StatelessWidget {
                     )
                     .toList(),
               )
-              // }()
-
-              // ...List.generate(3, (index) => )
-
-              // ClipRRect(
-              //     borderRadius: BorderRadius.circular(22),
-              //     child: Image.asset("assets/images/avatars/avatar_1.jpg", width: 44, height: 44))
             ],
           ),
-          Positioned(right: -10, top: -10, child: Image.asset(course.image))
+          Positioned(
+              right: -10, top: -10, child: Image.asset(widget.course.image))
         ],
       ),
     );

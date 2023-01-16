@@ -29,10 +29,8 @@ class _HomeTabViewState extends State<HomeTabView> {
               top: MediaQuery.of(context).padding.top + 60,
               bottom: MediaQuery.of(context).padding.bottom),
           child: Column(
-            // mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // SizedBox(height: MediaQuery.of(context).padding.top + 60),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
@@ -43,17 +41,15 @@ class _HomeTabViewState extends State<HomeTabView> {
               SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    ..._courses.map(
-                      (course) => Padding(
-                        key: course.id,
-                        padding: const EdgeInsets.all(10),
-                        child: VCard(course: course),
-                      ),
-                    )
-                  ],
-                ),
+                child: Row(children: [
+                  ..._courses.map(
+                    (course) => Padding(
+                      key: course.id,
+                      padding: const EdgeInsets.all(10),
+                      child: VCard(course: course),
+                    ),
+                  )
+                ]),
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -62,7 +58,6 @@ class _HomeTabViewState extends State<HomeTabView> {
                   style: TextStyle(fontSize: 20, fontFamily: "Poppins"),
                 ),
               ),
-
               ...List.generate(
                 _courseSections.length,
                 (index) => Padding(
