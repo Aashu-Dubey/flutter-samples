@@ -10,6 +10,16 @@ import 'package:flutter_samples/rive_app/navigation/side_menu.dart';
 import 'package:flutter_samples/rive_app/theme.dart';
 import 'package:flutter_samples/rive_app/assets.dart' as app_assets;
 
+// Common Tab Scene for the tabs other than 1st one, showing only tab name in center
+Widget commonTabScene(String tabName) {
+  return Container(
+      color: RiveAppTheme.background,
+      alignment: Alignment.center,
+      child: Text(tabName,
+          style: const TextStyle(
+              fontSize: 28, fontFamily: "Poppins", color: Colors.black)));
+}
+
 class RiveAppHome extends StatefulWidget {
   const RiveAppHome({Key? key}) : super(key: key);
 
@@ -30,10 +40,10 @@ class _RiveAppHomeState extends State<RiveAppHome>
   Widget _tabBody = Container(color: RiveAppTheme.background);
   final List<Widget> _screens = [
     const HomeTabView(),
-    const Center(child: Text("Search", style: TextStyle(color: Colors.white))),
-    const Center(child: Text("Timer", style: TextStyle(color: Colors.white))),
-    const Center(child: Text("Bell", style: TextStyle(color: Colors.white))),
-    const Center(child: Text("User", style: TextStyle(color: Colors.white)))
+    commonTabScene("Search"),
+    commonTabScene("Timer"),
+    commonTabScene("Bell"),
+    commonTabScene("User"),
   ];
 
   final springDesc = const SpringDescription(
@@ -237,7 +247,7 @@ class _RiveAppHomeState extends State<RiveAppHome>
               ),
             ),
           ),
-        // White underlay begind the bottom tab bar
+        // White underlay behind the bottom tab bar
         IgnorePointer(
           ignoring: true,
           child: Align(
