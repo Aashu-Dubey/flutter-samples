@@ -1,10 +1,10 @@
 # Flutter Samples
 
-Flutter Samples.
+- [Animated App with Rive](./lib/rive_app#readme):- An application with interactive UI and animations, with custom UI components like Bottom TabBar and SideBar, and using animated assets from [Rive](https://rive.app) | [Demo](https://twitter.com/aashudubey_ad/status/1616536431010406400).
 
-## Getting Started
+## 💪🏼 Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a starting point for this Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
