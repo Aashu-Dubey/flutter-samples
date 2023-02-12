@@ -68,11 +68,11 @@ class _RiveAppHomeState extends State<RiveAppHome>
       final springAnim = SpringSimulation(springDesc, 0, 1, 0);
       _onBoardingAnimController?.animateWith(springAnim);
     } else {
-      _onBoardingAnimController?.reverse().then((value) {
-        setState(() {
-          _showOnBoarding = false;
-        });
-      });
+      _onBoardingAnimController?.reverse().whenComplete(() => {
+            setState(() {
+              _showOnBoarding = false;
+            })
+          });
     }
   }
 
@@ -93,20 +93,21 @@ class _RiveAppHomeState extends State<RiveAppHome>
   @override
   void initState() {
     _animationController = AnimationController(
-        duration: const Duration(milliseconds: 200), upperBound: 1, vsync: this)
-      ..addListener(() {
-        setState(() {});
-      });
+      duration: const Duration(milliseconds: 200),
+      upperBound: 1,
+      vsync: this,
+    );
     _onBoardingAnimController = AnimationController(
-        duration: const Duration(milliseconds: 350), upperBound: 1, vsync: this)
-      ..addListener(() {
-        setState(() {});
-      });
+      duration: const Duration(milliseconds: 350),
+      upperBound: 1,
+      vsync: this,
+    );
 
     _sidebarAnim = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
       parent: _animationController!,
       curve: Curves.linear,
     ));
+
     _onBoardingAnim = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
       parent: _onBoardingAnimController!,
       curve: Curves.linear,
@@ -127,77 +128,67 @@ class _RiveAppHomeState extends State<RiveAppHome>
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: Stack(children: [
-        Positioned(child: Container(color: RiveAppTheme.background2)),
-        Transform(
-          alignment: Alignment.center,
-          transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.001)
-            ..rotateY(((1 - _sidebarAnim.value) * -30) * math.pi / 180),
-          child: Transform.translate(
-            offset: Offset((1 - _sidebarAnim.value) * -300, 0),
-            child: AnimatedOpacity(
-              opacity: _sidebarAnim.value * 1,
-              duration: const Duration(milliseconds: 200),
-              child: const SideMenu(),
-            ),
-          ),
-        ),
-        Transform.scale(
-          scale: 1 -
-              (_showOnBoarding
-                  ? (_onBoardingAnim.value * 0.08)
-                  : (_sidebarAnim.value * 0.1)),
-          child: Transform.translate(
-            offset: Offset(_sidebarAnim.value * 265, 0),
-            child: Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY((_sidebarAnim.value * 30) * math.pi / 180),
-              child: _tabBody,
-            ),
-          ),
-        ),
-        Positioned(
-          top: MediaQuery.of(context).padding.top + 20,
-          right: (_sidebarAnim.value * -100) + 16,
-          child: GestureDetector(
-            child: Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(18),
-                boxShadow: [
-                  BoxShadow(
-                    color: RiveAppTheme.shadow.withOpacity(0.2),
-                    blurRadius: 5,
-                    offset: const Offset(0, 5),
-                  )
-                ],
+      body: Stack(
+        children: [
+          Positioned(child: Container(color: RiveAppTheme.background2)),
+          RepaintBoundary(
+            child: AnimatedBuilder(
+              animation: _sidebarAnim,
+              builder: (BuildContext context, Widget? child) {
+                return Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..setEntry(3, 2, 0.001)
+                    ..rotateY(((1 - _sidebarAnim.value) * -30) * math.pi / 180)
+                    ..translate((1 - _sidebarAnim.value) * -300),
+                  child: child,
+                );
+              },
+              child: FadeTransition(
+                opacity: _sidebarAnim,
+                child: const SideMenu(),
               ),
-              child: const Icon(Icons.person_outline),
             ),
-            onTap: () {
-              _presentOnBoarding(true);
-            },
           ),
-        ),
-        SafeArea(
-          child: Row(children: [
-            // There's an issue/behaviour in flutter where translating the GestureDetector or any button
-            // doesn't translate the touch area, making the Widget unclickable, so instead setting a SizedBox
-            // in a Row to have a similar effect
-            SizedBox(width: _sidebarAnim.value * 216),
-            GestureDetector(
-              onTap: onMenuPress,
+          RepaintBoundary(
+            child: AnimatedBuilder(
+              animation: _showOnBoarding ? _onBoardingAnim : _sidebarAnim,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: 1 -
+                      (_showOnBoarding
+                          ? (_onBoardingAnim.value * 0.08)
+                          : (_sidebarAnim.value * 0.1)),
+                  child: Transform.translate(
+                    offset: Offset(_sidebarAnim.value * 265, 0),
+                    child: Transform(
+                      alignment: Alignment.center,
+                      transform: Matrix4.identity()
+                        ..setEntry(3, 2, 0.001)
+                        ..rotateY((_sidebarAnim.value * 30) * math.pi / 180),
+                      child: _tabBody,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          AnimatedBuilder(
+            animation: _sidebarAnim,
+            builder: (context, child) {
+              return Positioned(
+                top: MediaQuery.of(context).padding.top + 20,
+                right: (_sidebarAnim.value * -100) + 16,
+                child: child!,
+              );
+            },
+            child: GestureDetector(
               child: Container(
-                width: 44,
-                height: 44,
-                margin: const EdgeInsets.all(16),
+                width: 36,
+                height: 36,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(44 / 2),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(18),
                   boxShadow: [
                     BoxShadow(
                       color: RiveAppTheme.shadow.withOpacity(0.2),
@@ -206,80 +197,143 @@ class _RiveAppHomeState extends State<RiveAppHome>
                     )
                   ],
                 ),
-                child: RiveAnimation.asset(
-                  app_assets.menuButtonRiv,
-                  stateMachines: const ["State Machine"],
-                  animations: const ["open", "close"],
-                  onInit: _onMenuIconInit,
-                ),
+                child: const Icon(Icons.person_outline),
               ),
-            ),
-          ]),
-        ),
-        if (_showOnBoarding)
-          Transform.translate(
-            offset: Offset(
-                0,
-                -(MediaQuery.of(context).size.height +
-                        MediaQuery.of(context).padding.bottom) *
-                    (1 - _onBoardingAnim.value)),
-            child: SafeArea(
-              top: false,
-              maintainBottomViewPadding: true,
-              child: Container(
-                transform: Matrix4.translationValues(
-                    0, -(MediaQuery.of(context).padding.bottom + 18), 0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
-                        blurRadius: 40,
-                        offset: const Offset(0, 40))
-                  ],
-                ),
-                child: OnBoardingView(
-                  closeModal: () {
-                    _presentOnBoarding(false);
-                  },
-                ),
-              ),
-            ),
-          ),
-        // White underlay behind the bottom tab bar
-        IgnorePointer(
-          ignoring: true,
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 150,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  RiveAppTheme.background.withOpacity(0),
-                  RiveAppTheme.background.withOpacity(1 -
-                      ((!_showOnBoarding
-                              ? _sidebarAnim.value
-                              : _onBoardingAnim.value) *
-                          1))
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-              ),
-            ),
-          ),
-        ),
-      ]),
-      bottomNavigationBar: Transform.translate(
-        offset: Offset(
-            0,
-            !_showOnBoarding
-                ? _sidebarAnim.value * 300
-                : _onBoardingAnim.value * 200),
-        child: CustomTabBar(
-          onTabChange: (tabIndex) {
-            setState(
-              () {
-                _tabBody = _screens[tabIndex];
+              onTap: () {
+                _presentOnBoarding(true);
               },
+            ),
+          ),
+          RepaintBoundary(
+            child: AnimatedBuilder(
+              animation: _sidebarAnim,
+              builder: (context, child) {
+                return SafeArea(
+                  child: Row(
+                    children: [
+                      // There's an issue/behaviour in flutter where translating the GestureDetector or any button
+                      // doesn't translate the touch area, making the Widget unclickable, so instead setting a SizedBox
+                      // in a Row to have a similar effect
+                      SizedBox(width: _sidebarAnim.value * 216),
+                      child!,
+                    ],
+                  ),
+                );
+              },
+              child: GestureDetector(
+                onTap: onMenuPress,
+                child: Container(
+                  width: 44,
+                  height: 44,
+                  margin: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(44 / 2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: RiveAppTheme.shadow.withOpacity(0.2),
+                        blurRadius: 5,
+                        offset: const Offset(0, 5),
+                      )
+                    ],
+                  ),
+                  child: RiveAnimation.asset(
+                    app_assets.menuButtonRiv,
+                    stateMachines: const ["State Machine"],
+                    animations: const ["open", "close"],
+                    onInit: _onMenuIconInit,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          if (_showOnBoarding)
+            RepaintBoundary(
+              child: AnimatedBuilder(
+                animation: _onBoardingAnim,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(
+                        0,
+                        -(MediaQuery.of(context).size.height +
+                                MediaQuery.of(context).padding.bottom) *
+                            (1 - _onBoardingAnim.value)),
+                    child: child!,
+                  );
+                },
+                child: SafeArea(
+                  top: false,
+                  maintainBottomViewPadding: true,
+                  child: Container(
+                    transform: Matrix4.translationValues(
+                        0, -(MediaQuery.of(context).padding.bottom + 18), 0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            blurRadius: 40,
+                            offset: const Offset(0, 40))
+                      ],
+                    ),
+                    child: OnBoardingView(
+                      closeModal: () {
+                        _presentOnBoarding(false);
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          // White underlay behind the bottom tab bar
+          IgnorePointer(
+            ignoring: true,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: AnimatedBuilder(
+                  animation: !_showOnBoarding ? _sidebarAnim : _onBoardingAnim,
+                  builder: (context, child) {
+                    return Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            RiveAppTheme.background.withOpacity(0),
+                            RiveAppTheme.background.withOpacity(1 -
+                                ((!_showOnBoarding
+                                        ? _sidebarAnim.value
+                                        : _onBoardingAnim.value) *
+                                    1))
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: RepaintBoundary(
+        child: AnimatedBuilder(
+          animation: !_showOnBoarding ? _sidebarAnim : _onBoardingAnim,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(
+                  0,
+                  !_showOnBoarding
+                      ? _sidebarAnim.value * 300
+                      : _onBoardingAnim.value * 200),
+              child: CustomTabBar(
+                onTabChange: (tabIndex) {
+                  setState(
+                    () {
+                      _tabBody = _screens[tabIndex];
+                    },
+                  );
+                },
+              ),
             );
           },
         ),
