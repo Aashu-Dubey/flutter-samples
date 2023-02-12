@@ -227,11 +227,10 @@ class _SignInViewState extends State<SignInView> {
                                 fontSize: 15)),
                         const SizedBox(height: 24),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset(app_assets.logoEmail),
-                            const Spacer(),
                             Image.asset(app_assets.logoApple),
-                            const Spacer(),
                             Image.asset(app_assets.logoGoogle)
                           ],
                         ),
