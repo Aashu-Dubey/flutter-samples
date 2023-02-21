@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_samples/rive_app/assets.dart' as app_assets;
+import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class CourseModel {
   CourseModel(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_samples/rive_app/components/hcard.dart';
-import 'package:flutter_samples/rive_app/components/vcard.dart';
-import 'package:flutter_samples/rive_app/models/courses.dart';
-import 'package:flutter_samples/rive_app/theme.dart';
+import 'package:flutter_samples/samples/ui/rive_app/components/hcard.dart';
+import 'package:flutter_samples/samples/ui/rive_app/components/vcard.dart';
+import 'package:flutter_samples/samples/ui/rive_app/models/courses.dart';
+import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 
 class HomeTabView extends StatefulWidget {
   const HomeTabView({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart' hide LinearGradient;
-import 'package:flutter_samples/rive_app/theme.dart';
-import 'package:flutter_samples/rive_app/assets.dart' as app_assets;
+import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
+import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class SignInView extends StatefulWidget {
   const SignInView({Key? key, this.closeModal}) : super(key: key);
@@ -330,5 +330,5 @@ InputDecoration authInputStyle(String iconName) {
       contentPadding: const EdgeInsets.all(15),
       prefixIcon: Padding(
           padding: const EdgeInsets.only(left: 4),
-          child: Image.asset("assets/rive_app/images/$iconName.png")));
+          child: Image.asset("assets/samples/ui/rive_app/images/$iconName.png")));
 }

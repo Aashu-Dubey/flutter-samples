@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:rive/rive.dart';
-import 'package:flutter_samples/rive_app/theme.dart';
-import 'package:flutter_samples/rive_app/on_boarding/signin_view.dart';
-import 'package:flutter_samples/rive_app/assets.dart' as app_assets;
+import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
+import 'package:flutter_samples/samples/ui/rive_app/on_boarding/signin_view.dart';
+import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key, this.closeModal}) : super(key: key);

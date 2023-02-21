@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_samples/rive_app/models/tab_item.dart';
+import 'package:flutter_samples/samples/ui/rive_app/models/tab_item.dart';
 
 class MenuItemModel {
   MenuItemModel({

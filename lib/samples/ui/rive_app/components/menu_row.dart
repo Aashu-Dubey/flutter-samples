@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rive/rive.dart';
-import 'package:flutter_samples/rive_app/models/menu_item.dart';
-import 'package:flutter_samples/rive_app/assets.dart' as app_assets;
+import 'package:flutter_samples/samples/ui/rive_app/models/menu_item.dart';
+import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class MenuRow extends StatelessWidget {
   const MenuRow(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_samples/rive_app/home.dart';
+import 'package:flutter_samples/screens/samples_list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const RiveAppHome(),
+      home: const SamplesListView(
+        title: "Flutter Samples",
+        backEnabled: false,
+      ),
     );
   }
 }

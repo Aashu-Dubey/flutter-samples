@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter_samples/rive_app/models/courses.dart';
+import 'package:flutter_samples/samples/ui/rive_app/models/courses.dart';
 
 class VCard extends StatefulWidget {
   const VCard({Key? key, required this.course}) : super(key: key);
@@ -88,7 +88,7 @@ class _VCardState extends State<VCard> {
                           key: Key(index.toString()),
                           borderRadius: BorderRadius.circular(22),
                           child: Image.asset(
-                              "assets/rive_app/images/avatars/avatar_$number.jpg",
+                              "assets/samples/ui/rive_app/images/avatars/avatar_$number.jpg",
                               width: 44,
                               height: 44),
                         ),

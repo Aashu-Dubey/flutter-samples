@@ -14,14 +14,13 @@ https://user-images.githubusercontent.com/46301285/213805689-d5c8eb3f-12d0-42ef-
 
 ## 📦 Packages used
 
-1. [rive](https://pub.dev/packages/rive): To render and control the [Rive assets](../../assets/rive_app/rive).
+1. [rive](https://pub.dev/packages/rive): To render and control the [Rive assets](../../../../assets/samples/ui/rive_app/rive).
 
 ## 🎥 [Tutorials](https://youtube.com/playlist?list=PLpnMM6hhRccigVfEO2Ynj6DQB9MbW5CaF)
 
 | Episodes |  |
 | - | - |
 | <h3>1. [OnBoarding and SignIn UI](https://youtu.be/vmdafWtYzBg)</h3>🔖 Topics Covered<br>• OnBoarding UI<br>• SignIn UI<br>• Using SignIn UI as custom modal with transition animation<br>• Using and controlling Rive assets for animation<br>• Some Rive topics like Artboard, State Machines, one-shot animation etc.<br>• Some flutter Widgets like RepaintBoundary, ImageFilter, AnimatedBuilder etc. | <a href="https://youtu.be/vmdafWtYzBg" title="OnBoarding and SignIn UI - Flutter & Rive Tutorial"><img src="https://i.ytimg.com/vi/vmdafWtYzBg/maxresdefault.jpg" width="320px" alt="OnBoarding and SignIn UI - Flutter & Rive Tutorial Thumbnail" /></a> |
-
 
 ## 🌻 Motivation
 

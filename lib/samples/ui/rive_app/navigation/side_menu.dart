@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-import 'package:flutter_samples/rive_app/components/menu_row.dart';
-import 'package:flutter_samples/rive_app/models/menu_item.dart';
-import 'package:flutter_samples/rive_app/theme.dart';
-import 'package:flutter_samples/rive_app/assets.dart' as app_assets;
+import 'package:flutter_samples/samples/ui/rive_app/components/menu_row.dart';
+import 'package:flutter_samples/samples/ui/rive_app/models/menu_item.dart';
+import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
+import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class SideMenu extends StatefulWidget {
   const SideMenu({Key? key}) : super(key: key);
