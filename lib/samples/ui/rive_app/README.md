@@ -31,4 +31,5 @@ This app is a full Flutter replication of [this SwiftUI course](https://designco
 - [SwiftUI + Rive](https://designcode.io/swiftui-rive-animated-app): Original course in SwiftUI.
 - [🎥 Flutter + Rive YouTube Playlist](https://youtube.com/playlist?list=PLpnMM6hhRccigVfEO2Ynj6DQB9MbW5CaF): Video tutorials with step-by-step implementation of the project from scratch.
 - [Ionic Rive](https://github.com/Aashu-Dubey/Ionic-UI-Templates/tree/main/ionic_ui_templates/src/app/templates/course-rive): Ionic + Angular version for the same.
+- [Web Demo](https://aashu-dubey.github.io/flutter-samples/#/course-rive)
 - [Twitter Post](https://twitter.com/aashudubey_ad/status/1616536431010406400)

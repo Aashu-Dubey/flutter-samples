@@ -23,6 +23,8 @@ Widget commonTabScene(String tabName) {
 class RiveAppHome extends StatefulWidget {
   const RiveAppHome({Key? key}) : super(key: key);
 
+  static const String route = '/course-rive';
+
   @override
   State<RiveAppHome> createState() => _RiveAppHomeState();
 }

@@ -7,23 +7,23 @@ class SampleData {
       {this.name = "",
       this.description = "",
       this.background = "",
-      this.navigateScreen});
+      this.routeName});
 
   String name;
   String description;
   String background;
-  Widget? navigateScreen;
+  String? routeName;
 
   static List<SampleData> sampleTypes = [
     SampleData(
         name: 'UI',
         description: 'Full application UI samples with some interesting animations and challenges.',
         background: 'assets/samples/ui/rive_app/course_rive.png',
-        navigateScreen: const RiveAppHome()),
+        routeName: RiveAppHome.route),
     SampleData(
         name: 'Animations',
         description: 'Samples showcasing some interesting and complex animations in flutter.',
         background: 'assets/samples/animations/grid_magnification.png',
-        navigateScreen: const GridMagnification())
+        routeName: GridMagnification.route)
   ];
 }

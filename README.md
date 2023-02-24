@@ -8,12 +8,12 @@
 
 | UI Samples| |
 | :--- | --- |
-| <h3>Animated App with Rive</h3>**[> YouTube Tutorial Playlist](https://youtube.com/playlist?list=PLpnMM6hhRccigVfEO2Ynj6DQB9MbW5CaF)**<br><br>An application with interactive UI and animations, with custom UI components like Bottom TabBar and SideBar, and using animated assets from [Rive](https://rive.app)<br><br>**[> Source code](./lib/samples/ui/rive_app#readme)**<br>**[> Demo](https://twitter.com/aashudubey_ad/status/1616536431010406400)** | <a href="https://github.com/Aashu-Dubey/flutter-samples/tree/main/lib/samples/ui/rive_app#readme" title="Flutter + Rive Source code"><img alt="Flutter + Rive UI Preview" src="https://user-images.githubusercontent.com/46301285/212767021-ce434bc0-d6f8-41c1-a17a-360ea225009b.png" width="320"></a> |
+| <h3>Animated App with Rive</h3>**[> YouTube Tutorial Playlist](https://youtube.com/playlist?list=PLpnMM6hhRccigVfEO2Ynj6DQB9MbW5CaF)**<br><br>An application with interactive UI and animations, with custom UI components like Bottom TabBar and SideBar, and using animated assets from [Rive](https://rive.app)<br><br>**[> Source code](./lib/samples/ui/rive_app#readme)**<br>**> Demo:  [web](https://aashu-dubey.github.io/flutter-samples/#/course-rive) \| [twitter](https://twitter.com/aashudubey_ad/status/1616536431010406400)** | <a href="https://github.com/Aashu-Dubey/flutter-samples/tree/main/lib/samples/ui/rive_app#readme" title="Flutter + Rive Source code"><img alt="Flutter + Rive UI Preview" src="https://user-images.githubusercontent.com/46301285/212767021-ce434bc0-d6f8-41c1-a17a-360ea225009b.png" width="320"></a> |
 
 
 | Animation Samples| |
 | :--- | --- |
-| <h3>Grid Magnification</h3>A grid list view that displays Magnify effect on press & drag, focusing on the items near the touch area within a radius.<br><br>**[> Source code](./lib/samples/animations/grid_magnification#readme)**<br>**[> Demo]()** | <a href="https://github.com/Aashu-Dubey/flutter-samples/tree/main/lib/samples/ui/rive_app#readme" title="Flutter + Rive Source code"><img alt="Flutter + Rive UI Preview" src="./assets/samples/animations/grid_magnification.png" width="320"></a> |
+| <h3>Grid Magnification</h3>A grid list view that displays Magnify effect on press & drag, focusing on the items near the touch area within a radius.<br><br>**[> Source code](./lib/samples/animations/grid_magnification#readme)**<br>**> Demo:  [web](https://aashu-dubey.github.io/flutter-samples/#/grid-magnification) \| [twitter](https://twitter.com/aashudubey_ad/status/1629217199838879744)** | <a href="https://github.com/Aashu-Dubey/flutter-samples/tree/main/lib/samples/animations/grid_magnification#readme" title="Flutter Grid Magnification"><img alt="Flutter Grid Magnification Preview" src="./assets/samples/animations/grid_magnification.png" width="320"></a> |
 
 ## 💪🏼 Getting Started
 

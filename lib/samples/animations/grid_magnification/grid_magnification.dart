@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ui';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
@@ -7,8 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_samples/samples/animations/grid_magnification/icons.dart'
     as icons;
 
-// const cols = 12;
-// const rows = 22;
+double boxSize = 20 + 12; // 12 = padding
 double radius = 130;
 
 class TouchPoints {
@@ -21,32 +19,36 @@ class TouchPoints {
 class GridMagnification extends StatefulWidget {
   const GridMagnification({Key? key}) : super(key: key);
 
+  static const String route = '/grid-magnification';
+
   @override
   State<GridMagnification> createState() => _GridMagnificationState();
 }
 
 class _GridMagnificationState extends State<GridMagnification>
     with SingleTickerProviderStateMixin {
-  late Timer? _timer;
   late AnimationController _controller;
   late Animation<double> _gridAnim;
-  bool isMagnified = false;
   TouchPoints? touchPos;
 
+  var springDesc = const SpringDescription(
+    mass: 0.8,
+    stiffness: 100,
+    damping: 20,
+  );
+
   void onTouchUpdate(touchDetails, {isContinuous = false, isEnded = false}) {
+    /// Record the touch coordinates while touch is active
     if (!isEnded) {
       setState(() {
         touchPos = TouchPoints(
             x: touchDetails.localPosition.dx, y: touchDetails.localPosition.dy);
       });
     }
+
+    /// When Touch start or ends
     if (!isContinuous) {
       if (!isEnded) {
-        const springDesc = SpringDescription(
-          mass: 0.8,
-          stiffness: 100,
-          damping: 20,
-        );
         final springAnim = SpringSimulation(springDesc, 0, 1, 0);
         _controller.animateWith(springAnim);
       } else {
@@ -58,9 +60,7 @@ class _GridMagnificationState extends State<GridMagnification>
   @override
   void initState() {
     _controller = AnimationController(
-        vsync: this,
-        upperBound: 1,
-        duration: const Duration(milliseconds: 800));
+        vsync: this, duration: const Duration(milliseconds: 800));
     _gridAnim = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.linear,
@@ -71,6 +71,7 @@ class _GridMagnificationState extends State<GridMagnification>
   @override
   void dispose() {
     _controller.dispose();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     super.dispose();
   }
 
@@ -78,63 +79,45 @@ class _GridMagnificationState extends State<GridMagnification>
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var padding = MediaQuery.of(context).padding;
-     // subtracting padding to ignore safe area (portrait or landscape)
-    var viewWidth = size.width - padding.left - padding.right;
-    var viewHeight = size.height -
-        padding.top -
-        padding.bottom;
 
-    // var smallWidth = viewWidth / cols;
-    // var smallHeight = viewHeight / rows;
-    double smallWidth = 20 + 12; // 12 = horizontal padding
-    double smallHeight = 20 + 12;
-    var maxCol = viewWidth ~/ smallWidth;
-    var maxRow = viewHeight ~/ smallHeight;
+    /// subtracting padding to ignore safe area (portrait or landscape), 32 == margin
+    var viewWidth = size.width - padding.left - padding.right - 32;
+    var viewHeight = size.height - padding.top - padding.bottom - 32;
+
+    var maxCol = viewWidth ~/ boxSize;
+    var maxRow = viewHeight ~/ boxSize;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
+      value: SystemUiOverlayStyle.light,
       child: Scaffold(
           backgroundColor: Colors.black,
           body: SafeArea(
-            child: GestureDetector(
-              onPanDown: (details) {
-                _timer = Timer(const Duration(milliseconds: 150), () {
-                  setState(() {
-                    isMagnified = true;
-                  });
+            child: Align(
+              child: GestureDetector(
+                onPanDown: (details) {
                   onTouchUpdate(details);
-                });
-              },
-              onPanUpdate: (details) {
-                _timer?.cancel();
-                if (isMagnified) {
+                },
+                onPanUpdate: (details) {
                   onTouchUpdate(details, isContinuous: true);
-                }
-              },
-              onPanEnd: (details) {
-                onTouchUpdate(details, isEnded: true);
-                setState(() {
-                  isMagnified = false;
-                });
-                _timer?.cancel();
-              },
-              child: SizedBox(
-                width: viewWidth,
-                height: viewHeight,
-                child: GridView.count(
-                  crossAxisCount: maxCol,
-                  childAspectRatio: smallWidth / smallHeight,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: List.generate(
-                    maxCol * maxRow,
-                    (index) => BoxItem(
-                        width: smallWidth,
-                        height: smallHeight,
-                        maxCol: maxCol,
-                        index: index,
-                        touchPos: touchPos,
-                        animationController: _controller,
-                        gridAnim: _gridAnim),
+                },
+                onPanEnd: (details) {
+                  onTouchUpdate(details, isEnded: true);
+                },
+                child: SizedBox(
+                  width: viewWidth,
+                  height: viewHeight,
+                  child: GridView.count(
+                    crossAxisCount: maxCol,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: List.generate(
+                      maxCol * maxRow,
+                      (index) => BoxItem(
+                          maxCol: maxCol,
+                          index: index,
+                          touchPos: touchPos,
+                          animationController: _controller,
+                          gridAnim: _gridAnim),
+                    ),
                   ),
                 ),
               ),
@@ -145,8 +128,6 @@ class _GridMagnificationState extends State<GridMagnification>
 }
 
 class BoxItem extends StatefulWidget {
-  final double width;
-  final double height;
   final int index;
   final int maxCol;
   final TouchPoints? touchPos;
@@ -154,9 +135,7 @@ class BoxItem extends StatefulWidget {
   final Animation gridAnim;
 
   const BoxItem(
-      {this.width = 0,
-      this.height = 0,
-      this.index = 0,
+      {this.index = 0,
       this.maxCol = 0,
       this.touchPos,
       required this.animationController,
@@ -170,10 +149,13 @@ class BoxItem extends StatefulWidget {
 
 class _BoxItemState extends State<BoxItem> {
   late String boxIcon;
+  double distance = 0.0;
+  double translateX = 0.0, translateY = 0.0;
+  double? scaleVal = 1;
 
   @override
   void initState() {
-    // Initially get indexed icon, but if more then icons array length then get a random index
+    /// Initially get indexed icon, but if more then icons array length then get a random index
     boxIcon = widget.index < icons.appIcons.length
         ? icons.appIcons[widget.index]
         : icons.appIcons[math.Random().nextInt(icons.appIcons.length)];
@@ -184,17 +166,15 @@ class _BoxItemState extends State<BoxItem> {
   Widget build(BuildContext context) {
     var row = widget.index ~/ widget.maxCol;
     var col = widget.index % widget.maxCol;
-    var posX = col * widget.width + (widget.width / 2);
-    var posY = row * widget.height + (widget.height / 2);
+    var posX = col * boxSize + (boxSize / 2);
+    var posY = row * boxSize + (boxSize / 2);
     var distance = 0.0;
     if (widget.touchPos != null) {
-      // Getting distance between two points using equation, d=√((x2 – x1)² + (y2 – y1)²)
+      /// Getting distance between two points using equation, d=√((x2 – x1)² + (y2 – y1)²)
       distance = math.sqrt(math.pow(widget.touchPos!.x! - posX, 2) +
           math.pow(widget.touchPos!.y! - posY, 2));
     }
 
-    var translateX = 0.0, translateY = 0.0;
-    double? scaleVal = 1;
     if (widget.touchPos != null) {
       /// Here 'touchPos.value.(x/y) - pos(X/Y)' will translate a particular item to the touch point, then multiplying
       /// that value with this median (correct name?) will distribute items to a distance, basically forming a Circle.
@@ -205,7 +185,7 @@ class _BoxItemState extends State<BoxItem> {
       translateX = (widget.touchPos!.x! - posX) * median;
       translateY = (widget.touchPos!.y! - posY) * median;
 
-      // Clamp the translate value to the touch point if it is getting past that.
+      /// Clamp the translate value to the touch point if it is getting past that.
       if (translateX.abs() > (widget.touchPos!.x! - posX).abs()) {
         translateX = widget.touchPos!.x! - posX;
       }
@@ -213,7 +193,7 @@ class _BoxItemState extends State<BoxItem> {
         translateY = widget.touchPos!.y! - posY;
       }
 
-      // Ref: https://stackoverflow.com/a/929107
+      /// Ref: https://stackoverflow.com/a/929107
       double getRange(double min, double max) =>
           (((distance - min) * (1 - 0)) / (max - min)) + 0;
 
@@ -251,14 +231,13 @@ class _BoxItemState extends State<BoxItem> {
                 child: child));
       },
       child: Container(
-        width: widget.width,
-        height: widget.height,
+        width: boxSize,
+        height: boxSize,
         margin: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(6),
         ),
-        // child: Text('$index', style: const TextStyle(fontSize: 10)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(6),
           // child: Image.network(boxIcon, fit: BoxFit.cover),

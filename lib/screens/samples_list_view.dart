@@ -17,14 +17,9 @@ class _SamplesListViewState extends State<SamplesListView> {
   bool isGrid = false;
 
   void onSamplePress(int index) {
-    if (SampleData.sampleTypes[index].navigateScreen != null) {
-      Navigator.push<dynamic>(
-        context,
-        MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) =>
-              SampleData.sampleTypes[index].navigateScreen!,
-        ),
-      );
+    var routeName = SampleData.sampleTypes[index].routeName;
+    if (routeName != null) {
+      Navigator.pushNamed(context, routeName);
     }
   }
 
