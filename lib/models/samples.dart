@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_samples/samples/animations/grid_magnification/grid_magnification.dart';
 import 'package:flutter_samples/samples/ui/rive_app/home.dart';
 

@@ -205,7 +205,6 @@ class _BoxItemState extends State<BoxItem> {
       ///
       /// Currently setting the scaling hard coded (3, 2, 1) and it seems to be working fine for different radius.
       /// Make it dynamic?
-      ///
       if (distance >= 0 && distance < 0.01) {
         scaleVal = lerpDouble(1, 3, getRange(0, 0.01));
       } else if (distance >= 0.01 && distance < radius / 3) {

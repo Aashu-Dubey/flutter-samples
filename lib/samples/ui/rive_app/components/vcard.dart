@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_samples/samples/ui/rive_app/models/courses.dart';
 
 class VCard extends StatefulWidget {
@@ -49,7 +48,6 @@ class _VCardState extends State<VCard> {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 constraints: const BoxConstraints(maxWidth: 170),
@@ -80,21 +78,20 @@ class _VCardState extends State<VCard> {
               const Spacer(),
               Wrap(
                 spacing: 8,
-                children: avatars
-                    .mapIndexed(
-                      (index, number) => Transform.translate(
-                        offset: Offset(index * -20, 0),
-                        child: ClipRRect(
-                          key: Key(index.toString()),
-                          borderRadius: BorderRadius.circular(22),
-                          child: Image.asset(
-                              "assets/samples/ui/rive_app/images/avatars/avatar_$number.jpg",
-                              width: 44,
-                              height: 44),
-                        ),
-                      ),
-                    )
-                    .toList(),
+                children: List.generate(
+                  avatars.length,
+                  (index) => Transform.translate(
+                    offset: Offset(index * -20, 0),
+                    child: ClipRRect(
+                      key: Key(index.toString()),
+                      borderRadius: BorderRadius.circular(22),
+                      child: Image.asset(
+                          "assets/samples/ui/rive_app/images/avatars/avatar_${avatars[index]}.jpg",
+                          width: 44,
+                          height: 44),
+                    ),
+                  ),
+                ),
               )
             ],
           ),

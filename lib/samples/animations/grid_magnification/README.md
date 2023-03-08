@@ -14,3 +14,4 @@ Inspired by [this original SwiftUI implementation](https://twitter.com/philipcda
 
 - [Web Demo](https://aashu-dubey.github.io/flutter-samples/#/grid-magnification)
 - [Twitter Post](https://twitter.com/aashudubey_ad/status/1629217199838879744)
+- [RN Grid Magnification](https://github.com/Aashu-Dubey/react-native-animation-samples/tree/main/src/samples/grid_magnification): React Native implementation of the same sample

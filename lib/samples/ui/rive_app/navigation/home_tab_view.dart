@@ -41,15 +41,17 @@ class _HomeTabViewState extends State<HomeTabView> {
               SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                 scrollDirection: Axis.horizontal,
-                child: Row(children: [
-                  ..._courses.map(
-                    (course) => Padding(
-                      key: course.id,
-                      padding: const EdgeInsets.all(10),
-                      child: VCard(course: course),
-                    ),
-                  )
-                ]),
+                child: Row(
+                  children: _courses
+                      .map(
+                        (course) => Padding(
+                          key: course.id,
+                          padding: const EdgeInsets.all(10),
+                          child: VCard(course: course),
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
