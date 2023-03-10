@@ -2,30 +2,43 @@ name: Build an Android APK
 
 on:
   push:
-    paths-ignore:
-      - '**/*.md'
+    paths:
+      - '*'
+      - '.github/workflows/build-apk.yml'
+      - 'assets/**'
+      - 'lib/**'
+      - 'android/**'
+      - '!**/*.md'
     branches:
       - main
 
 jobs:
-  build-and-deploy:
+  build-apk:
     permissions:
       contents: write
+    name: Build Android APK
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+
       # Setup Java environment in order to build the Android app.
-      - uses: actions/setup-java@v2
+      - name: Setup Java environment
+        uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '11'
+          cache: 'gradle'
 
       # Setup the flutter environment.
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
 
       # Get flutter dependencies.
-      - run: flutter pub get
+      - name: Install Flutter dependencies
+        run: flutter pub get
 
       # Statically analyze the Dart code for any errors.
       # - run: flutter analyze .
@@ -34,10 +47,12 @@ jobs:
       # - run: flutter test
 
       # Build the Android apk.
-      - run: flutter build apk
+      - name: Build Android APK
+        run: flutter build apk
 
       # Upload generated apk to the artifacts.
-      - uses: actions/upload-artifact@v3
+      - name: Save apk file as artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: flutter-actions-test
+          name: flutter-samples
           path: build/app/outputs/flutter-apk/app-release.apk

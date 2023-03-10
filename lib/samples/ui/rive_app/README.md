@@ -6,11 +6,11 @@ An application with interactive UI and animations, with custom UI components lik
   <img alt="Flutter + Rive UI Preview" src="https://user-images.githubusercontent.com/46301285/212767021-ce434bc0-d6f8-41c1-a17a-360ea225009b.png" height="250px">
 </p>
 
-<h2 align="center">
+<h3 align="center">
   <a href="https://aashu-dubey.github.io/flutter-samples/#/course-rive">
     Web Demo
   </a>
-</h2>
+</h3>
 
 ## 👀 This is how it looks
 
@@ -42,5 +42,4 @@ This app is a full Flutter replication of [this SwiftUI course](https://designco
 - [SwiftUI + Rive](https://designcode.io/swiftui-rive-animated-app): Original course in SwiftUI.
 - [🎥 Flutter + Rive YouTube Playlist](https://youtube.com/playlist?list=PLpnMM6hhRccigVfEO2Ynj6DQB9MbW5CaF): Video tutorials with step-by-step implementation of the project from scratch.
 - [Ionic Rive](https://github.com/Aashu-Dubey/Ionic-UI-Templates/tree/main/ionic_ui_templates/src/app/templates/course-rive): Ionic + Angular version for the same.
-- [Web Demo](https://aashu-dubey.github.io/flutter-samples/#/course-rive)
-- [Twitter Post](https://twitter.com/aashudubey_ad/status/1616536431010406400)
+- **Demo: [web](https://aashu-dubey.github.io/flutter-samples/#/course-rive) \| [youtube](https://youtube.com/shorts/jek80t32XqY) \| [twitter](https://twitter.com/aashudubey_ad/status/1616536431010406400)**
