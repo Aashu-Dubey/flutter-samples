@@ -159,8 +159,8 @@ class _RiveAppHomeState extends State<RiveAppHome>
                 return Transform.scale(
                   scale: 1 -
                       (_showOnBoarding
-                          ? (_onBoardingAnim.value * 0.08)
-                          : (_sidebarAnim.value * 0.1)),
+                          ? _onBoardingAnim.value * 0.08
+                          : _sidebarAnim.value * 0.1),
                   child: Transform.translate(
                     offset: Offset(_sidebarAnim.value * 265, 0),
                     child: Transform(
@@ -168,11 +168,12 @@ class _RiveAppHomeState extends State<RiveAppHome>
                       transform: Matrix4.identity()
                         ..setEntry(3, 2, 0.001)
                         ..rotateY((_sidebarAnim.value * 30) * math.pi / 180),
-                      child: _tabBody,
+                      child: child,
                     ),
                   ),
                 );
               },
+              child: _tabBody,
             ),
           ),
           AnimatedBuilder(
@@ -302,10 +303,9 @@ class _RiveAppHomeState extends State<RiveAppHome>
                           colors: [
                             RiveAppTheme.background.withOpacity(0),
                             RiveAppTheme.background.withOpacity(1 -
-                                ((!_showOnBoarding
-                                        ? _sidebarAnim.value
-                                        : _onBoardingAnim.value) *
-                                    1))
+                                (!_showOnBoarding
+                                    ? _sidebarAnim.value
+                                    : _onBoardingAnim.value))
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -327,17 +327,18 @@ class _RiveAppHomeState extends State<RiveAppHome>
                   !_showOnBoarding
                       ? _sidebarAnim.value * 300
                       : _onBoardingAnim.value * 200),
-              child: CustomTabBar(
-                onTabChange: (tabIndex) {
-                  setState(
-                    () {
-                      _tabBody = _screens[tabIndex];
-                    },
-                  );
-                },
-              ),
+              child: child,
             );
           },
+          child: CustomTabBar(
+            onTabChange: (tabIndex) {
+              setState(
+                () {
+                  _tabBody = _screens[tabIndex];
+                },
+              );
+            },
+          ),
         ),
       ),
     );

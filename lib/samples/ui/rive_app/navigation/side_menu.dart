@@ -48,7 +48,6 @@ class _SideMenuState extends State<SideMenu> {
           top: MediaQuery.of(context).padding.top,
           bottom: MediaQuery.of(context).padding.bottom - 60),
       constraints: const BoxConstraints(maxWidth: 288),
-      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: RiveAppTheme.background2,
         borderRadius: BorderRadius.circular(30),

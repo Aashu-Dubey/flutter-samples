@@ -175,7 +175,34 @@ class _OnBoardingViewState extends State<OnBoardingView>
                   Positioned(
                       top: 100 - (_signInAnimController!.value * 180),
                       right: 20,
-                      child: child!),
+                      child: SafeArea(
+                        child: CupertinoButton(
+                          padding: EdgeInsets.zero,
+                          borderRadius: BorderRadius.circular(36 / 2),
+                          minSize: 36,
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(36 / 2),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 10))
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onPressed: () {
+                            widget.closeModal!();
+                          },
+                        ),
+                      )),
                   Positioned.fill(
                     child: IgnorePointer(
                       ignoring: true,
@@ -191,42 +218,15 @@ class _OnBoardingViewState extends State<OnBoardingView>
                       -MediaQuery.of(context).size.height *
                           (1 - _signInAnimController!.value),
                     ),
-                    child: SignInView(
-                      closeModal: () {
-                        _signInAnimController?.reverse();
-                      },
-                    ),
+                    child: child,
                   ),
                 ],
               );
             },
-            child: SafeArea(
-              child: CupertinoButton(
-                padding: EdgeInsets.zero,
-                borderRadius: BorderRadius.circular(36 / 2),
-                minSize: 36,
-                child: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(36 / 2),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          blurRadius: 10,
-                          offset: const Offset(0, 10))
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                  ),
-                ),
-                onPressed: () {
-                  widget.closeModal!();
-                },
-              ),
+            child: SignInView(
+              closeModal: () {
+                _signInAnimController?.reverse();
+              },
             ),
           ),
         ),
