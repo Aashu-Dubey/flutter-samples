@@ -20,6 +20,7 @@ class _HomeTabViewState extends State<HomeTabView> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
+        clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: RiveAppTheme.background,
           borderRadius: BorderRadius.circular(30),
@@ -60,12 +61,20 @@ class _HomeTabViewState extends State<HomeTabView> {
                   style: TextStyle(fontSize: 20, fontFamily: "Poppins"),
                 ),
               ),
-              ...List.generate(
-                _courseSections.length,
-                (index) => Padding(
-                  key: _courseSections[index].id,
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  child: HCard(section: _courseSections[index]),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Wrap(
+                  children: List.generate(
+                    _courseSections.length,
+                    (index) => Container(
+                      key: _courseSections[index].id,
+                      width: MediaQuery.of(context).size.width > 992
+                          ? ((MediaQuery.of(context).size.width - 20) / 2)
+                          : MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 20),
+                      child: HCard(section: _courseSections[index]),
+                    ),
+                  ),
                 ),
               )
             ],

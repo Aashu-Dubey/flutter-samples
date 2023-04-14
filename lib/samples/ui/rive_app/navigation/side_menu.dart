@@ -89,17 +89,25 @@ class _SideMenuState extends State<SideMenu> {
               ],
             ),
           ),
-          MenuButtonSection(
-              title: "BROWSE",
-              selectedMenu: _selectedMenu,
-              menuIcons: _browseMenuIcons,
-              onMenuPress: onMenuPress),
-          MenuButtonSection(
-              title: "HISTORY",
-              selectedMenu: _selectedMenu,
-              menuIcons: _historyMenuIcons,
-              onMenuPress: onMenuPress),
-          const Spacer(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  MenuButtonSection(
+                      title: "BROWSE",
+                      selectedMenu: _selectedMenu,
+                      menuIcons: _browseMenuIcons,
+                      onMenuPress: onMenuPress),
+                  MenuButtonSection(
+                      title: "HISTORY",
+                      selectedMenu: _selectedMenu,
+                      menuIcons: _historyMenuIcons,
+                      onMenuPress: onMenuPress),
+                ],
+              ),
+            ),
+          ),
+          // const Spacer(),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Row(children: [

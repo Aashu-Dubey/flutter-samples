@@ -186,21 +186,24 @@ class _RiveAppHomeState extends State<RiveAppHome>
               );
             },
             child: GestureDetector(
-              child: Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: [
-                    BoxShadow(
-                      color: RiveAppTheme.shadow.withOpacity(0.2),
-                      blurRadius: 5,
-                      offset: const Offset(0, 5),
-                    )
-                  ],
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    boxShadow: [
+                      BoxShadow(
+                        color: RiveAppTheme.shadow.withOpacity(0.2),
+                        blurRadius: 5,
+                        offset: const Offset(0, 5),
+                      )
+                    ],
+                  ),
+                  child: const Icon(Icons.person_outline),
                 ),
-                child: const Icon(Icons.person_outline),
               ),
               onTap: () {
                 _presentOnBoarding(true);
@@ -225,25 +228,28 @@ class _RiveAppHomeState extends State<RiveAppHome>
               },
               child: GestureDetector(
                 onTap: onMenuPress,
-                child: Container(
-                  width: 44,
-                  height: 44,
-                  margin: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(44 / 2),
-                    boxShadow: [
-                      BoxShadow(
-                        color: RiveAppTheme.shadow.withOpacity(0.2),
-                        blurRadius: 5,
-                        offset: const Offset(0, 5),
-                      )
-                    ],
-                  ),
-                  child: RiveAnimation.asset(
-                    app_assets.menuButtonRiv,
-                    stateMachines: const ["State Machine"],
-                    animations: const ["open", "close"],
-                    onInit: _onMenuIconInit,
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: Container(
+                    width: 44,
+                    height: 44,
+                    margin: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(44 / 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: RiveAppTheme.shadow.withOpacity(0.2),
+                          blurRadius: 5,
+                          offset: const Offset(0, 5),
+                        )
+                      ],
+                    ),
+                    child: RiveAnimation.asset(
+                      app_assets.menuButtonRiv,
+                      stateMachines: const ["State Machine"],
+                      animations: const ["open", "close"],
+                      onInit: _onMenuIconInit,
+                    ),
                   ),
                 ),
               ),
@@ -267,11 +273,14 @@ class _RiveAppHomeState extends State<RiveAppHome>
                   top: false,
                   maintainBottomViewPadding: true,
                   child: Container(
-                    transform: Matrix4.translationValues(
-                        0, -(MediaQuery.of(context).padding.bottom + 18), 0),
+                    clipBehavior: Clip.hardEdge,
+                    margin: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).padding.bottom + 18),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(30)),
                       boxShadow: [
                         BoxShadow(
                             color: Colors.black.withOpacity(0.5),
@@ -330,14 +339,17 @@ class _RiveAppHomeState extends State<RiveAppHome>
               child: child,
             );
           },
-          child: CustomTabBar(
-            onTabChange: (tabIndex) {
-              setState(
-                () {
-                  _tabBody = _screens[tabIndex];
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              CustomTabBar(
+                onTabChange: (tabIndex) {
+                  setState(() {
+                    _tabBody = _screens[tabIndex];
+                  });
                 },
-              );
-            },
+              )
+            ],
           ),
         ),
       ),

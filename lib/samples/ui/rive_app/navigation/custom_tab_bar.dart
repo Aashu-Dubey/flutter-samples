@@ -47,6 +47,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
       child: Container(
         margin: const EdgeInsets.fromLTRB(24, 0, 24, 8),
         padding: const EdgeInsets.all(1),
+        constraints: const BoxConstraints(maxWidth: 768),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           gradient: LinearGradient(colors: [

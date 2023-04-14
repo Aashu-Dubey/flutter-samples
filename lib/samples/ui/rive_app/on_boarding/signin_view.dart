@@ -82,7 +82,6 @@ class _SignInViewState extends State<SignInView> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
             child: Stack(
               children: [
                 Container(
