@@ -104,8 +104,8 @@ class _GridMagnificationState extends State<GridMagnification>
                   onTouchUpdate(details, isEnded: true);
                 },
                 child: SizedBox(
-                  width: viewWidth,
-                  height: viewHeight,
+                  width: maxCol * boxSize,
+                  height: maxRow * boxSize,
                   child: GridView.count(
                     crossAxisCount: maxCol,
                     physics: const NeverScrollableScrollPhysics(),
