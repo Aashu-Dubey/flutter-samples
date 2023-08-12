@@ -1,0 +1,167 @@
+{
+  "abi": "ARM64_V8A",
+  "info": {
+    "abi": "ARM64_V8A",
+    "bitness": 64,
+    "deprecated": false,
+    "default": true
+  },
+  "cxxBuildFolder": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\2x549v1j\\arm64-v8a",
+  "soFolder": "S:\\project\\flutter-samples\\build\\rive_common\\intermediates\\cxx\\Debug\\2x549v1j\\obj\\arm64-v8a",
+  "soRepublishFolder": "S:\\project\\flutter-samples\\build\\rive_common\\intermediates\\cmake\\debug\\obj\\arm64-v8a",
+  "abiPlatformVersion": 19,
+  "cmake": {
+    "effectiveConfiguration": {
+      "inheritEnvironments": [],
+      "variables": []
+    }
+  },
+  "variant": {
+    "buildSystemArgumentList": [],
+    "cFlagsList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": [],
+    "implicitBuildTargetSet": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "module": {
+      "cxxFolder": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx",
+      "intermediatesBaseFolder": "S:\\project\\flutter-samples\\build\\rive_common\\intermediates",
+      "intermediatesFolder": "S:\\project\\flutter-samples\\build\\rive_common\\intermediates\\cxx",
+      "gradleModulePathName": ":rive_common",
+      "moduleRootFolder": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android",
+      "moduleBuildFile": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\build.gradle",
+      "makeFile": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "ndkFolder": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393",
+      "ndkVersion": "25.1.8937393",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "LIBCXX_STATIC",
+      "ndkMetaPlatforms": {
+        "min": 19,
+        "max": 33,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29,
+          "R": 30,
+          "S": 31,
+          "Sv2": 32,
+          "Tiramisu": 33
+        }
+      },
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "cmakeToolchainFile": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\\build\\cmake\\android.toolchain.cmake",
+      "cmake": {
+        "isValidCmakeAvailable": true,
+        "cmakeExe": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\cmake.exe",
+        "minimumCmakeVersion": "3.18.1"
+      },
+      "stlSharedObjectMap": {
+        "LIBCXX_SHARED": {
+          "ARMEABI_V7A": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
+          "ARM64_V8A": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
+          "X86": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+          "X86_64": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "SYSTEM": {}
+      },
+      "project": {
+        "rootBuildGradleFolder": "S:\\project\\flutter-samples\\android",
+        "sdkFolder": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isPrefabEnabled": false
+      },
+      "outputOptions": [],
+      "ninjaExe": "C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\ninja.exe"
+    },
+    "prefabClassPaths": [],
+    "prefabPackages": [],
+    "prefabPackageConfigurations": [],
+    "stlType": "c++_static",
+    "optimizationTag": "Debug"
+  },
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "prefabFolder": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\2x549v1j\\prefab\\arm64-v8a",
+  "isActiveAbi": true,
+  "fullConfigurationHash": "2x549v1j4o4i183js5k4d1q195z5f4aq5o69371fa2x283r495z142z636m",
+  "configurationArguments": [
+    "-HC:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android",
+    "-DCMAKE_SYSTEM_NAME\u003dAndroid",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON",
+    "-DCMAKE_SYSTEM_VERSION\u003d19",
+    "-DANDROID_PLATFORM\u003dandroid-19",
+    "-DANDROID_ABI\u003darm64-v8a",
+    "-DCMAKE_ANDROID_ARCH_ABI\u003darm64-v8a",
+    "-DANDROID_NDK\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393",
+    "-DCMAKE_ANDROID_NDK\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393",
+    "-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\\build\\cmake\\android.toolchain.cmake",
+    "-DCMAKE_MAKE_PROGRAM\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\ninja.exe",
+    "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dS:\\project\\flutter-samples\\build\\rive_common\\intermediates\\cxx\\Debug\\2x549v1j\\obj\\arm64-v8a",
+    "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dS:\\project\\flutter-samples\\build\\rive_common\\intermediates\\cxx\\Debug\\2x549v1j\\obj\\arm64-v8a",
+    "-DCMAKE_BUILD_TYPE\u003dDebug",
+    "-BC:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\2x549v1j\\arm64-v8a",
+    "-GNinja"
+  ],
+  "intermediatesParentFolder": "S:\\project\\flutter-samples\\build\\rive_common\\intermediates\\cxx\\Debug\\2x549v1j"
+}

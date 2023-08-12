@@ -1,0 +1,184 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 19 min SDK version: armeabi-v7a",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 971726400
+  },
+  {
+    "level_": 0,
+    "message_": "rebuilding JSON C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\\android_gradle_build.json due to:",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1130866727
+  },
+  {
+    "level_": 0,
+    "message_": "- expected json C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\\android_gradle_build.json file is not present, will remove stale json folder",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1984512689
+  },
+  {
+    "level_": 0,
+    "message_": "- missing previous command file C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\\metadata_generation_command.txt, will remove stale json folder",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1786828815
+  },
+  {
+    "level_": 0,
+    "message_": "- command changed from previous, will remove stale json folder",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1294989197
+  },
+  {
+    "level_": 0,
+    "message_": "removing stale contents from \u0027C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\u0027",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1550358087
+  },
+  {
+    "level_": 0,
+    "message_": "created folder \u0027C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\u0027",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -994649915
+  },
+  {
+    "level_": 0,
+    "message_": "executing cmake Executable : C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\cmake.exe\narguments : \n-HC:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_SYSTEM_VERSION\u003d19\n-DANDROID_PLATFORM\u003dandroid-19\n-DANDROID_ABI\u003darmeabi-v7a\n-DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a\n-DANDROID_NDK\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\n-DCMAKE_ANDROID_NDK\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\n-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\\build\\cmake\\android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\ninja.exe\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dD:\\Undercover\\undercover\\build\\rive_common\\intermediates\\cxx\\Debug\\06v43196\\obj\\armeabi-v7a\n-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dD:\\Undercover\\undercover\\build\\rive_common\\intermediates\\cxx\\Debug\\06v43196\\obj\\armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-BC:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\n-GNinja\njvmArgs : \n\n",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1682083627
+  },
+  {
+    "level_": 0,
+    "message_": "Executable : C:\\Users\\91981\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\cmake.exe\narguments : \n-HC:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_SYSTEM_VERSION\u003d19\n-DANDROID_PLATFORM\u003dandroid-19\n-DANDROID_ABI\u003darmeabi-v7a\n-DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a\n-DANDROID_NDK\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\n-DCMAKE_ANDROID_NDK\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\n-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\ndk\\25.1.8937393\\build\\cmake\\android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003dC:\\Users\\91981\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\ninja.exe\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dD:\\Undercover\\undercover\\build\\rive_common\\intermediates\\cxx\\Debug\\06v43196\\obj\\armeabi-v7a\n-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dD:\\Undercover\\undercover\\build\\rive_common\\intermediates\\cxx\\Debug\\06v43196\\obj\\armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-BC:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\n-GNinja\njvmArgs : \n\n",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 209571020
+  },
+  {
+    "level_": 0,
+    "message_": "Exiting generation of C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\\compile_commands.json.bin normally",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1412490523
+  },
+  {
+    "level_": 0,
+    "message_": "done executing cmake",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 982642946
+  },
+  {
+    "level_": 0,
+    "message_": "write command file C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\.cxx\\Debug\\06v43196\\armeabi-v7a\\metadata_generation_command.txt",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -2077387763
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed without problems",
+    "file_": "C:\\Users\\91981\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.2.6\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1374251266
+  }
+]

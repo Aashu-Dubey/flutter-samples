@@ -1,0 +1,11 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="app.rive.rive" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="16"
+6-->C:\Users\91981\AppData\Local\Pub\Cache\hosted\pub.dev\rive_common-0.2.6\android\src\main\AndroidManifest.xml
+7        android:targetSdkVersion="16" />
+7-->C:\Users\91981\AppData\Local\Pub\Cache\hosted\pub.dev\rive_common-0.2.6\android\src\main\AndroidManifest.xml
+8
+9</manifest>

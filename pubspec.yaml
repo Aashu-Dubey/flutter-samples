@@ -35,11 +35,15 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  rive: ^0.10.4
+  firebase_auth: ^4.7.2
+  rive: ^0.11.14
+  google_fonts:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  material_design_icons_flutter: ^7.0.7296
+  flutter_svg: ^2.0.7
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -68,6 +72,7 @@ flutter:
     - assets/samples/ui/rive_app/images/backgrounds/
     - assets/samples/ui/rive_app/images/topics/
     - assets/samples/ui/rive_app/images/avatars/
+    - assets/loginPageImages.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

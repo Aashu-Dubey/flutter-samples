@@ -1,0 +1,4 @@
+#Sat Aug 12 10:02:33 IST 2023
+base.0=D\:\\Undercover\\undercover\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

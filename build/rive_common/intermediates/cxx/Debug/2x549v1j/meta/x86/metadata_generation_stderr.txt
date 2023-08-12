@@ -1,0 +1,45 @@
+CMake Warning (dev) in CMakeLists.txt:
+  No project() command is present.  The top-level CMakeLists.txt file must
+  contain a literal, direct call to the project() command.  Add a line of
+  code such as
+
+    project(ProjectName)
+
+  near the top of the file, but after cmake_minimum_required().
+
+  CMake is pretending there is a "project(Project)" command on the first
+  line.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning at C:/Users/91981/AppData/Local/Android/Sdk/ndk/25.1.8937393/build/cmake/android-legacy.toolchain.cmake:415 (message):
+  An old version of CMake is being used that cannot automatically detect
+  compiler attributes.  Compiler identification is being bypassed.  Some
+  values may be wrong or missing.  Update to CMake 3.19 or newer to use
+  CMake's built-in compiler identification.
+Call Stack (most recent call first):
+  C:/Users/91981/AppData/Local/Android/Sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake:54 (include)
+  C:/Users/91981/AppData/Local/Android/Sdk/cmake/3.18.1/share/cmake-3.18/Modules/CMakeDetermineSystem.cmake:93 (include)
+
+
+CMake Warning at C:/Users/91981/AppData/Local/Android/Sdk/ndk/25.1.8937393/build/cmake/android-legacy.toolchain.cmake:415 (message):
+  An old version of CMake is being used that cannot automatically detect
+  compiler attributes.  Compiler identification is being bypassed.  Some
+  values may be wrong or missing.  Update to CMake 3.19 or newer to use
+  CMake's built-in compiler identification.
+Call Stack (most recent call first):
+  C:/Users/91981/AppData/Local/Android/Sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake:54 (include)
+  C:/Users/91981/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.6/android/.cxx/Debug/2x549v1j/x86/CMakeFiles/3.18.1-g262b901-dirty/CMakeSystem.cmake:6 (include)
+  C:/Users/91981/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.6/android/.cxx/Debug/2x549v1j/x86/CMakeFiles/CMakeTmp/CMakeLists.txt:2 (project)
+
+
+CMake Warning at C:/Users/91981/AppData/Local/Android/Sdk/ndk/25.1.8937393/build/cmake/android-legacy.toolchain.cmake:415 (message):
+  An old version of CMake is being used that cannot automatically detect
+  compiler attributes.  Compiler identification is being bypassed.  Some
+  values may be wrong or missing.  Update to CMake 3.19 or newer to use
+  CMake's built-in compiler identification.
+Call Stack (most recent call first):
+  C:/Users/91981/AppData/Local/Android/Sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake:54 (include)
+  C:/Users/91981/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.6/android/.cxx/Debug/2x549v1j/x86/CMakeFiles/3.18.1-g262b901-dirty/CMakeSystem.cmake:6 (include)
+  C:/Users/91981/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.6/android/.cxx/Debug/2x549v1j/x86/CMakeFiles/CMakeTmp/CMakeLists.txt:2 (project)
+
+
