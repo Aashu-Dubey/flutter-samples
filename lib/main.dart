@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_samples/samples/animations/custom_caret/custom_caret.dart';
 import 'package:flutter_samples/screens/samples_list_view.dart';
 import 'package:flutter_samples/samples/ui/rive_app/home.dart';
 import 'package:flutter_samples/samples/animations/grid_magnification/grid_magnification.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         RiveAppHome.route: (context) => const RiveAppHome(),
         GridMagnification.route: (context) => const GridMagnification(),
+        CustomCaret.route: (context) => const CustomCaret(),
       },
       home: const SamplesListView(
         title: "Flutter Samples",
