@@ -19,7 +19,7 @@ class TouchPoints {
 class GridMagnification extends StatefulWidget {
   const GridMagnification({Key? key}) : super(key: key);
 
-  static const String route = '/grid-magnification';
+  static const String route = '/animations/grid-magnification';
 
   @override
   State<GridMagnification> createState() => _GridMagnificationState();

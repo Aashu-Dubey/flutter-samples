@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_samples/models/samples.dart';
 
 class ListItemView extends StatelessWidget {
-  const ListItemView({super.key, this.index = 0, this.onPressed});
+  const ListItemView(
+      {super.key, this.index = 0, this.onPressed, required this.listItem});
 
   final int index;
   final Function? onPressed;
+  final SampleData listItem;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class ListItemView extends StatelessWidget {
                     border: Border.all(width: 0.3, color: Colors.grey.shade400),
                     borderRadius: BorderRadius.circular(8)),
                 child: Image.asset(
-                  SampleData.sampleTypes[index].background,
+                  listItem.background,
                   width: 80,
                   height: 80,
                 ),
@@ -47,13 +49,15 @@ class ListItemView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        SampleData.sampleTypes[index].name,
+                        listItem.name,
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        SampleData.sampleTypes[index].description,
+                        listItem.description,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             fontSize: 12, color: Colors.black45),
                       )

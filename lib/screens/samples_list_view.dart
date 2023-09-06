@@ -4,10 +4,15 @@ import 'package:flutter_samples/screens/list/grid_item_view.dart';
 import 'package:flutter_samples/screens/list/list_item_view.dart';
 
 class SamplesListView extends StatefulWidget {
-  const SamplesListView({super.key, this.title = "", this.backEnabled = true});
+  const SamplesListView(
+      {super.key,
+      this.title = "",
+      this.backEnabled = true,
+      required this.listData});
 
   final String title;
   final bool backEnabled;
+  final List<SampleData> listData;
 
   @override
   State<SamplesListView> createState() => _SamplesListViewState();
@@ -17,7 +22,7 @@ class _SamplesListViewState extends State<SamplesListView> {
   bool isGrid = false;
 
   void onSamplePress(int index) {
-    var routeName = SampleData.sampleTypes[index].routeName;
+    var routeName = widget.listData[index].routeName;
     if (routeName != null) {
       Navigator.pushNamed(context, routeName);
     }
@@ -46,7 +51,7 @@ class _SamplesListViewState extends State<SamplesListView> {
                           splashRadius: 24,
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
-                          onPressed: () => {})
+                          onPressed: () => Navigator.pop(context))
                       : Container(width: 32),
                   Text(
                     widget.title,
@@ -82,19 +87,21 @@ class _SamplesListViewState extends State<SamplesListView> {
                         crossAxisSpacing: 12.0,
                       ),
                       scrollDirection: Axis.vertical,
-                      children: List<Widget>.generate(
-                          SampleData.sampleTypes.length, (index) {
+                      children: List<Widget>.generate(widget.listData.length,
+                          (index) {
                         return GridItemView(
                             index: index,
+                            listItem: widget.listData[index],
                             onPressed: () => onSamplePress(index));
                       }),
                     )
                   : ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 6),
-                      itemCount: SampleData.sampleTypes.length,
+                      itemCount: widget.listData.length,
                       itemBuilder: (context, index) {
                         return ListItemView(
                             index: index,
+                            listItem: widget.listData[index],
                             onPressed: () => onSamplePress(index));
                       }),
             )

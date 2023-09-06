@@ -5,7 +5,7 @@ import 'package:flutter_samples/samples/animations/custom_caret/password_strengt
 class CustomCaret extends StatefulWidget {
   const CustomCaret({super.key});
 
-  static const String route = '/custom-caret';
+  static const String route = '/animations/custom-caret';
 
   @override
   State<CustomCaret> createState() => _CustomCaretState();

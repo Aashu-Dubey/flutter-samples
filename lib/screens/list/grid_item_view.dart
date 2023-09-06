@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_samples/models/samples.dart';
 
 class GridItemView extends StatelessWidget {
-  const GridItemView({super.key, this.index = 0, this.onPressed});
+  const GridItemView(
+      {super.key, this.index = 0, this.onPressed, required this.listItem});
 
   final int index;
   final Function? onPressed;
+  final SampleData listItem;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class GridItemView extends StatelessWidget {
           children: [
             Positioned.fill(
               child: Image.asset(
-                SampleData.sampleTypes[index].background,
+                listItem.background,
               ),
             ),
             Container(color: Colors.black.withOpacity(0.5)),
@@ -29,7 +31,8 @@ class GridItemView extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(4),
                 child: Text(
-                  SampleData.sampleTypes[index].name,
+                  listItem.name,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,

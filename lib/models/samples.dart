@@ -1,3 +1,4 @@
+import 'package:flutter_samples/samples/animations/animation_samples_list.dart';
 import 'package:flutter_samples/samples/animations/custom_caret/custom_caret.dart';
 import 'package:flutter_samples/samples/animations/grid_magnification/grid_magnification.dart';
 import 'package:flutter_samples/samples/ui/rive_app/home.dart';
@@ -26,7 +27,7 @@ class SampleData {
         description:
             'Samples showcasing some interesting and complex animations in flutter.',
         background: 'assets/samples/animations/grid_magnification.png',
-        routeName: GridMagnification.route)
+        routeName: AnimationSamplesList.route),
   ];
 
   static List<SampleData> animationSamples = [
@@ -38,8 +39,9 @@ class SampleData {
         routeName: GridMagnification.route),
     SampleData(
         name: 'Custom Cursor/Caret',
-        description: 'A Customization custom cursor/caret for TextFields.',
-        background: 'assets/samples/animations/grid_magnification.png',
+        description:
+            'A Customizable custom cursor/caret for TextFields, with intuitive validation animations for max length and password strength.',
+        background: 'assets/samples/animations/custom_caret.png',
         routeName: CustomCaret.route)
   ];
 }
