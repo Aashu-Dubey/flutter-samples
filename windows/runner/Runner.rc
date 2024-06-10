@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "flutter_samples" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "flutter_samples" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.ashu. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 com.ashu. All rights reserved." "\0"
             VALUE "OriginalFilename", "flutter_samples.exe" "\0"
             VALUE "ProductName", "flutter_samples" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
