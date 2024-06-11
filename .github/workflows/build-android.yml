@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - '*'
-      - '.github/workflows/build-apk.yml'
+      - '.github/workflows/build-android.yml'
       - 'assets/**'
       - 'lib/**'
       - 'android/**'
