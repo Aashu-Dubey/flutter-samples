@@ -18,7 +18,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Setup the flutter environment.
       - name: Setup Flutter environment
@@ -27,7 +27,7 @@ jobs:
           cache: true
 
       - name: Restore Pods cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ios/Pods
@@ -47,7 +47,7 @@ jobs:
           zip -r -y -o output/flutter_samples.zip flutter_samples.app
 
       - name: Save build file as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: flutter_samples
           path: build/ios/iphonesimulator/output
