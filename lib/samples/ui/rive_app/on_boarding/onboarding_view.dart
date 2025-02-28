@@ -1,8 +1,8 @@
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart' hide Image;
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' hide Image;
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 import 'package:flutter_samples/samples/ui/rive_app/on_boarding/signin_view.dart';
 import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
