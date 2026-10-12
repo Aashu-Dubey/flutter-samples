@@ -25,7 +25,7 @@ class _CaretMaxLengthState extends State<CaretMaxLength>
   var inputCloneKey = GlobalKey();
   Size inputSize = const Size(0, 0);
 
-  updateCursorPosition({rerender = false}) {
+  void updateCursorPosition({bool rerender = false}) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // Get sizes for input and it's clone
       var inputBox = inputKey.currentContext?.findRenderObject() as RenderBox;

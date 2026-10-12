@@ -21,7 +21,7 @@ Widget commonTabScene(String tabName) {
 }
 
 class RiveAppHome extends StatefulWidget {
-  const RiveAppHome({Key? key}) : super(key: key);
+  const RiveAppHome({super.key});
 
   static const String route = '/course-rive';
 
@@ -142,7 +142,12 @@ class _RiveAppHomeState extends State<RiveAppHome>
                   transform: Matrix4.identity()
                     ..setEntry(3, 2, 0.001)
                     ..rotateY(((1 - _sidebarAnim.value) * -30) * math.pi / 180)
-                    ..translate((1 - _sidebarAnim.value) * -300),
+                    ..translateByDouble(
+                      (1 - _sidebarAnim.value) * -300,
+                      0.0,
+                      0.0,
+                      1.0,
+                    ),
                   child: child,
                 );
               },
@@ -196,7 +201,7 @@ class _RiveAppHomeState extends State<RiveAppHome>
                     borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
-                        color: RiveAppTheme.shadow.withOpacity(0.2),
+                        color: RiveAppTheme.shadow.withValues(alpha: 0.2),
                         blurRadius: 5,
                         offset: const Offset(0, 5),
                       )
@@ -238,7 +243,7 @@ class _RiveAppHomeState extends State<RiveAppHome>
                       borderRadius: BorderRadius.circular(44 / 2),
                       boxShadow: [
                         BoxShadow(
-                          color: RiveAppTheme.shadow.withOpacity(0.2),
+                          color: RiveAppTheme.shadow.withValues(alpha: 0.2),
                           blurRadius: 5,
                           offset: const Offset(0, 5),
                         )
@@ -283,7 +288,7 @@ class _RiveAppHomeState extends State<RiveAppHome>
                           bottomRight: Radius.circular(30)),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black.withValues(alpha: 0.5),
                             blurRadius: 40,
                             offset: const Offset(0, 40))
                       ],
@@ -310,8 +315,8 @@ class _RiveAppHomeState extends State<RiveAppHome>
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            RiveAppTheme.background.withOpacity(0),
-                            RiveAppTheme.background.withOpacity(1 -
+                            RiveAppTheme.background.withValues(alpha: 0),
+                            RiveAppTheme.background.withValues(alpha: 1 -
                                 (!_showOnBoarding
                                     ? _sidebarAnim.value
                                     : _onBoardingAnim.value))

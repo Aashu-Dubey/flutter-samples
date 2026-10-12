@@ -6,8 +6,7 @@ import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class MenuRow extends StatelessWidget {
   const MenuRow(
-      {Key? key, required this.menu, this.selectedMenu = "Home", this.onMenuPress})
-      : super(key: key);
+      {super.key, required this.menu, this.selectedMenu = "Home", this.onMenuPress});
 
   final MenuItemModel menu;
   final String selectedMenu;

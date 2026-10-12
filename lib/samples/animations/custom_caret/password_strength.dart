@@ -51,7 +51,7 @@ class _PasswordStrengthState extends State<PasswordStrength>
   var inputCloneKey = GlobalKey();
   Size inputSize = const Size(0, 0);
 
-  updateCursorPosition({rerender = false}) {
+  void updateCursorPosition({bool rerender = false}) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // Get sizes for input and it's clone
       var inputBox = inputKey.currentContext?.findRenderObject() as RenderBox;
@@ -87,7 +87,7 @@ class _PasswordStrengthState extends State<PasswordStrength>
     });
   }
 
-  checkpasswordStrength() {
+  void checkpasswordStrength() {
     var value = _inputController.text;
     var strength = 0;
     var validity = PassValidity();
@@ -118,7 +118,7 @@ class _PasswordStrengthState extends State<PasswordStrength>
     });
   }
 
-  getErrText(String title, bool valid) {
+  TextSpan getErrText(String title, bool valid) {
     var color = _passFocusNode.hasFocus || _inputController.text.isEmpty
         ? Colors.grey
         : valid
@@ -309,12 +309,12 @@ class _PasswordStrengthState extends State<PasswordStrength>
           const SizedBox(height: 8),
           TextButton(
             style: const ButtonStyle(
-                padding: MaterialStatePropertyAll(EdgeInsets.all(12)),
-                shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                padding: WidgetStatePropertyAll(EdgeInsets.all(12)),
+                shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)))),
-                backgroundColor: MaterialStatePropertyAll(Colors.blueAccent),
+                backgroundColor: WidgetStatePropertyAll(Colors.blueAccent),
                 splashFactory: InkSparkle.splashFactory,
-                overlayColor: MaterialStatePropertyAll(Colors.lightBlue)),
+                overlayColor: WidgetStatePropertyAll(Colors.lightBlue)),
             child: const Text(
               "Submit",
               style: TextStyle(color: Colors.white),

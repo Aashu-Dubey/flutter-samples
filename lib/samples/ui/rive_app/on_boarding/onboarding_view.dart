@@ -8,7 +8,7 @@ import 'package:flutter_samples/samples/ui/rive_app/on_boarding/signin_view.dart
 import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class OnBoardingView extends StatefulWidget {
-  const OnBoardingView({Key? key, this.closeModal}) : super(key: key);
+  const OnBoardingView({super.key, this.closeModal});
 
   // Close modal callback for any screen that uses this as a modal
   final Function? closeModal;
@@ -108,7 +108,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
                           Text(
                             "Don’t skip design. Learn design and code, by building real apps with React and Swift. Complete courses about the best tools.",
                             style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
+                                color: Colors.black.withValues(alpha: 0.7),
                                 fontFamily: "Inter",
                                 fontSize: 17),
                           ),
@@ -128,7 +128,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.black.withValues(alpha: 0.3),
                               blurRadius: 10,
                               offset: const Offset(0, 10),
                             )
@@ -172,7 +172,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
                   Text(
                     "Purchase includes access to 30+ courses, 240+ premium tutorials, 120+ hours of videos, source files and certificates.",
                     style: TextStyle(
-                        color: Colors.black.withOpacity(0.7),
+                        color: Colors.black.withValues(alpha: 0.7),
                         fontFamily: "Inter",
                         fontSize: 13),
                   ),
@@ -194,7 +194,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
                         child: CupertinoButton(
                           padding: EdgeInsets.zero,
                           borderRadius: BorderRadius.circular(36 / 2),
-                          minSize: 36,
+                          minimumSize: Size(36, 36),
                           child: Container(
                             width: 36,
                             height: 36,
@@ -203,7 +203,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
                               borderRadius: BorderRadius.circular(36 / 2),
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
+                                    color: Colors.black.withValues(alpha: 0.3),
                                     blurRadius: 10,
                                     offset: const Offset(0, 10))
                               ],

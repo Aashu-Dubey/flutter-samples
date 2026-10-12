@@ -7,7 +7,7 @@ import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({Key? key}) : super(key: key);
+  const SideMenu({super.key});
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -20,7 +20,7 @@ class _SideMenuState extends State<SideMenu> {
   String _selectedMenu = MenuItemModel.menuItems[0].title;
   bool _isDarkMode = false;
 
-  void onThemeRiveIconInit(artboard) {
+  void onThemeRiveIconInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(
         artboard, _themeMenuIcon[0].riveIcon.stateMachine);
     artboard.addController(controller!);
@@ -34,7 +34,7 @@ class _SideMenuState extends State<SideMenu> {
     });
   }
 
-  void onThemeToggle(value) {
+  void onThemeToggle(bool value) {
     setState(() {
       _isDarkMode = value;
     });
@@ -60,7 +60,7 @@ class _SideMenuState extends State<SideMenu> {
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.white.withOpacity(0.2),
+                  backgroundColor: Colors.white.withValues(alpha: 0.2),
                   foregroundColor: Colors.white,
                   child: const Icon(Icons.person_outline),
                 ),
@@ -80,7 +80,7 @@ class _SideMenuState extends State<SideMenu> {
                     Text(
                       "Software Engineer",
                       style: TextStyle(
-                          color: Colors.white.withOpacity(0.7),
+                          color: Colors.white.withValues(alpha: 0.7),
                           fontSize: 15,
                           fontFamily: "Inter"),
                     )
@@ -146,12 +146,11 @@ class _SideMenuState extends State<SideMenu> {
 
 class MenuButtonSection extends StatelessWidget {
   const MenuButtonSection(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.menuIcons,
       this.selectedMenu = "Home",
-      this.onMenuPress})
-      : super(key: key);
+      this.onMenuPress});
 
   final String title;
   final String selectedMenu;
@@ -169,7 +168,7 @@ class MenuButtonSection extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white.withValues(alpha: 0.7),
                 fontSize: 15,
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w600),
@@ -181,7 +180,7 @@ class MenuButtonSection extends StatelessWidget {
             children: [
               for (var menu in menuIcons) ...[
                 Divider(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                     thickness: 1,
                     height: 1,
                     indent: 16,

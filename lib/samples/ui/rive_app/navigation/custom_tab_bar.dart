@@ -6,7 +6,7 @@ import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class CustomTabBar extends StatefulWidget {
-  const CustomTabBar({Key? key, required this.onTabChange}) : super(key: key);
+  const CustomTabBar({super.key, required this.onTabChange});
 
   final Function(int tabIndex) onTabChange;
 
@@ -51,19 +51,19 @@ class _CustomTabBarState extends State<CustomTabBar> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           gradient: LinearGradient(colors: [
-            Colors.white.withOpacity(0.5),
-            Colors.white.withOpacity(0)
+            Colors.white.withValues(alpha: 0.5),
+            Colors.white.withValues(alpha: 0)
           ]),
         ),
         child: Container(
           // Clip to avoid the tab touch outside the border radius area
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-            color: RiveAppTheme.background2.withOpacity(0.8),
+            color: RiveAppTheme.background2.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: RiveAppTheme.background2.withOpacity(0.3),
+                color: RiveAppTheme.background2.withValues(alpha: 0.3),
                 blurRadius: 20,
                 offset: const Offset(0, 20),
               )

@@ -5,7 +5,7 @@ import 'package:flutter_samples/samples/ui/rive_app/models/courses.dart';
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 
 class HomeTabView extends StatefulWidget {
-  const HomeTabView({Key? key}) : super(key: key);
+  const HomeTabView({super.key});
 
   @override
   State<HomeTabView> createState() => _HomeTabViewState();

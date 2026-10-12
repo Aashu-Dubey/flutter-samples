@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_samples/samples/ui/rive_app/models/courses.dart';
 
 class HCard extends StatelessWidget {
-  const HCard({Key? key, required this.section}) : super(key: key);
+  const HCard({super.key, required this.section});
 
   final CourseModel section;
 

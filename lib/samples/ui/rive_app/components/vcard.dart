@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_samples/samples/ui/rive_app/models/courses.dart';
 
 class VCard extends StatefulWidget {
-  const VCard({Key? key, required this.course}) : super(key: key);
+  const VCard({super.key, required this.course});
 
   final CourseModel course;
 
@@ -26,17 +26,17 @@ class _VCardState extends State<VCard> {
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [widget.course.color, widget.course.color.withOpacity(0.5)],
+            colors: [widget.course.color, widget.course.color.withValues(alpha: 0.5)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
         boxShadow: [
           BoxShadow(
-            color: widget.course.color.withOpacity(0.3),
+            color: widget.course.color.withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 12),
           ),
           BoxShadow(
-            color: widget.course.color.withOpacity(0.3),
+            color: widget.course.color.withValues(alpha: 0.3),
             blurRadius: 2,
             offset: const Offset(0, 1),
           )
@@ -64,7 +64,7 @@ class _VCardState extends State<VCard> {
                 maxLines: 2,
                 softWrap: false,
                 style: TextStyle(
-                    color: Colors.white.withOpacity(0.7), fontSize: 15),
+                    color: Colors.white.withValues(alpha: 0.7), fontSize: 15),
               ),
               const SizedBox(height: 8),
               Text(

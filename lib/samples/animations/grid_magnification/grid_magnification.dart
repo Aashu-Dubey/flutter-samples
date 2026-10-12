@@ -17,7 +17,7 @@ class TouchPoints {
 }
 
 class GridMagnification extends StatefulWidget {
-  const GridMagnification({Key? key}) : super(key: key);
+  const GridMagnification({super.key});
 
   static const String route = '/animations/grid-magnification';
 
@@ -37,12 +37,12 @@ class _GridMagnificationState extends State<GridMagnification>
     damping: 20,
   );
 
-  void onTouchUpdate(touchDetails, {isContinuous = false, isEnded = false}) {
+  void onTouchUpdate(Offset localPosition, {bool isContinuous = false, bool isEnded = false}) {
     /// Record the touch coordinates while touch is active
     if (!isEnded) {
       setState(() {
         touchPos = TouchPoints(
-            x: touchDetails.localPosition.dx, y: touchDetails.localPosition.dy);
+            x: localPosition.dx, y: localPosition.dy);
       });
     }
 
@@ -95,13 +95,13 @@ class _GridMagnificationState extends State<GridMagnification>
             child: Align(
               child: GestureDetector(
                 onPanDown: (details) {
-                  onTouchUpdate(details);
+                  onTouchUpdate(details.localPosition);
                 },
                 onPanUpdate: (details) {
-                  onTouchUpdate(details, isContinuous: true);
+                  onTouchUpdate(details.localPosition, isContinuous: true);
                 },
                 onPanEnd: (details) {
-                  onTouchUpdate(details, isEnded: true);
+                  onTouchUpdate(details.localPosition, isEnded: true);
                 },
                 child: SizedBox(
                   width: maxCol * boxSize,
@@ -140,8 +140,7 @@ class BoxItem extends StatefulWidget {
       this.touchPos,
       required this.animationController,
       required this.gridAnim,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   State<BoxItem> createState() => _BoxItemState();

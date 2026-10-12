@@ -25,7 +25,7 @@ class GridItemView extends StatelessWidget {
                 listItem.background,
               ),
             ),
-            Container(color: Colors.black.withOpacity(0.5)),
+            Container(color: Colors.black.withValues(alpha: 0.5)),
             Align(
               alignment: Alignment.center,
               child: Padding(
