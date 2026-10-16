@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart' hide Image;
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
-import 'package:rive/rive.dart' hide Image;
+import 'package:rive/rive.dart';
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 import 'package:flutter_samples/samples/ui/rive_app/on_boarding/signin_view.dart';
 import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
@@ -22,8 +22,18 @@ class _OnBoardingViewState extends State<OnBoardingView>
   // Animation controller that shows the sign up modal as well as translateY boarding content together
   AnimationController? _signInAnimController;
 
-  // Control touch effect animation for the "Start the Course" button
-  late RiveAnimationController _btnController;
+  late File file;
+  late File shapesFile;
+  Artboard? artboard;
+  Artboard? shapesArtboard;
+  late SingleAnimationPainter painter;
+  late SingleAnimationPainter shapesPainter;
+
+  final springDesc = SpringDescription(
+    mass: 0.1,
+    stiffness: 40,
+    damping: 5,
+  );
 
   @override
   void initState() {
@@ -33,26 +43,46 @@ class _OnBoardingViewState extends State<OnBoardingView>
         upperBound: 1,
         vsync: this);
 
-    _btnController = OneShotAnimation("active", autoplay: false);
+    initRiveAssets();
+  }
 
-    const springDesc = SpringDescription(
-      mass: 0.1,
-      stiffness: 40,
-      damping: 5,
-    );
+  void initRiveAssets() async {
+    shapesFile = (await File.asset(app_assets.shapesRiv, riveFactory: Factory.rive))!;
+    shapesPainter = SingleAnimationPainter('Animation 1');
+    shapesArtboard = shapesFile.defaultArtboard();
 
-    _btnController.isActiveChanged.addListener(() {
-      if (!_btnController.isActive) {
-        final springAnim = SpringSimulation(springDesc, 0, 1, 0);
-        _signInAnimController?.animateWith(springAnim);
-      }
+    file = (await File.asset(app_assets.buttonRiv, riveFactory: Factory.rive))!;
+    initBtnPainer();
+    setState(() {});
+  }
+
+  void initBtnPainer() {
+    painter = SingleAnimationPainter('active', fit: Fit.cover);
+    artboard = file.defaultArtboard();
+  }
+
+  void startCourseBtnPress() {
+    painter.dispose();
+    artboard?.dispose();
+    initBtnPainer();
+    
+    Future.delayed(const Duration(milliseconds: 800), () {
+      final springAnim = SpringSimulation(springDesc, 0, 1, 0);
+      _signInAnimController?.animateWith(springAnim);
     });
+    setState(() {}); // rebuild RiveArtboardWidget with new painter
   }
 
   @override
   void dispose() {
     _signInAnimController?.dispose();
-    _btnController.dispose();
+
+    file.dispose();
+    shapesFile.dispose();
+    artboard?.dispose();
+    shapesArtboard?.dispose();
+    painter.dispose();
+    shapesPainter.dispose();
     super.dispose();
   }
 
@@ -73,10 +103,14 @@ class _OnBoardingViewState extends State<OnBoardingView>
             ),
           ),
         ),
-        ImageFiltered(
-          imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-          child: const RiveAnimation.asset(app_assets.shapesRiv),
-        ),
+        if (shapesArtboard != null)
+          ImageFiltered(
+            imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+            child: RiveArtboardWidget(
+              artboard: shapesArtboard!,
+              painter: shapesPainter,
+            ),
+          ),
         AnimatedBuilder(
           animation: _signInAnimController!,
           builder: (context, child) {
@@ -136,11 +170,11 @@ class _OnBoardingViewState extends State<OnBoardingView>
                         ),
                         child: Stack(
                           children: [
-                            RiveAnimation.asset(
-                              app_assets.buttonRiv,
-                              fit: BoxFit.cover,
-                              controllers: [_btnController],
-                            ),
+                            if (artboard != null)
+                              RiveArtboardWidget(
+                                artboard: artboard!,
+                                painter: painter,
+                              ),
                             Center(
                               child: Transform.translate(
                                 offset: const Offset(4, 4),
@@ -165,7 +199,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
                       ),
                     ),
                     onTap: () {
-                      _btnController.isActive = true;
+                      startCourseBtnPress();
                     },
                   ),
                   const SizedBox(height: 16),

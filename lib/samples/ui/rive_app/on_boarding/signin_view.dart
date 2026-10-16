@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' hide Factory;
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart' hide LinearGradient, Image;
+import 'package:rive/rive.dart';
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
@@ -17,9 +18,19 @@ class _SignInViewState extends State<SignInView> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
 
-  late SMITrigger _successAnim;
-  late SMITrigger _errorAnim;
-  late SMITrigger _confettiAnim;
+  late final checkFileLoader = FileLoader.fromAsset(
+    app_assets.checkRiv,
+    riveFactory: Factory.rive,
+  );
+  late final confettiFileLoader = FileLoader.fromAsset(
+    app_assets.confettiRiv,
+    riveFactory: Factory.rive,
+  );
+
+  TriggerInput? _successAnim;
+  TriggerInput? _errorAnim;
+  TriggerInput? _resetAnim;
+  TriggerInput? _confettiAnim;
 
   bool _isLoading = false;
 
@@ -27,23 +38,24 @@ class _SignInViewState extends State<SignInView> {
   void dispose() {
     _emailController.dispose();
     _passController.dispose();
+
+    checkFileLoader.dispose();
+    confettiFileLoader.dispose();
+    _successAnim?.dispose();
+    _errorAnim?.dispose();
+    _resetAnim?.dispose();
+    _confettiAnim?.dispose();
     super.dispose();
   }
 
-  void _onCheckRiveInit(Artboard artboard) {
-    final controller =
-        StateMachineController.fromArtboard(artboard, "State Machine 1");
-    artboard.addController(controller!);
-    _successAnim = controller.findInput<bool>("Check") as SMITrigger;
-    _errorAnim = controller.findInput<bool>("Error") as SMITrigger;
+  void _onCheckRiveInit(RiveWidgetController controller) {
+    _successAnim = controller.stateMachine.trigger("Check");
+    _errorAnim = controller.stateMachine.trigger("Error");
+    _resetAnim = controller.stateMachine.trigger("Reset");
   }
 
-  void _onConfettiRiveInit(Artboard artboard) {
-    final controller =
-        StateMachineController.fromArtboard(artboard, "State Machine 1");
-    artboard.addController(controller!);
-    _confettiAnim =
-        controller.findInput<bool>("Trigger explosion") as SMITrigger;
+  void _onConfettiRiveInit(RiveWidgetController controller) {
+    _confettiAnim = controller.stateMachine.trigger("Trigger explosion");
   }
 
   void login() {
@@ -56,14 +68,15 @@ class _SignInViewState extends State<SignInView> {
     bool isValid = isEmailValid && isPassValid;
 
     Future.delayed(const Duration(seconds: 1), () {
-      isValid ? _successAnim.fire() : _errorAnim.fire();
+      isValid ? _successAnim?.fire() : _errorAnim?.fire();
     });
 
     Future.delayed(const Duration(seconds: 3), () {
+      _resetAnim?.fire();
       setState(() {
         _isLoading = false;
       });
-      if (isValid) _confettiAnim.fire();
+      if (isValid) _confettiAnim?.fire();
     });
 
     if (isValid) {
@@ -248,9 +261,21 @@ class _SignInViewState extends State<SignInView> {
                           SizedBox(
                             width: 100,
                             height: 100,
-                            child: RiveAnimation.asset(
-                              app_assets.checkRiv,
-                              onInit: _onCheckRiveInit,
+                            child: RiveWidgetBuilder(
+                              fileLoader: checkFileLoader,
+                              onLoaded: (state) =>
+                                  _onCheckRiveInit(state.controller),
+                              builder: (context, state) {
+                                if (state is RiveLoaded) {
+                                  return RiveWidget(
+                                    controller: state.controller,
+                                  );
+                                }
+                                if (state is RiveFailed && kDebugMode) {
+                                  debugPrint('Rive failed: ${state.error}');
+                                }
+                                return const SizedBox.shrink();
+                              },
                             ),
                           ),
                         Positioned.fill(
@@ -259,9 +284,21 @@ class _SignInViewState extends State<SignInView> {
                             height: 500,
                             child: Transform.scale(
                               scale: 3,
-                              child: RiveAnimation.asset(
-                                app_assets.confettiRiv,
-                                onInit: _onConfettiRiveInit,
+                              child: RiveWidgetBuilder(
+                                fileLoader: confettiFileLoader,
+                                onLoaded: (state) =>
+                                    _onConfettiRiveInit(state.controller),
+                                builder: (context, state) {
+                                  if (state is RiveLoaded) {
+                                    return RiveWidget(
+                                      controller: state.controller,
+                                    );
+                                  }
+                                  if (state is RiveFailed && kDebugMode) {
+                                    debugPrint('Rive failed: ${state.error}');
+                                  }
+                                  return const SizedBox.shrink();
+                                },
                               ),
                             ),
                           ),

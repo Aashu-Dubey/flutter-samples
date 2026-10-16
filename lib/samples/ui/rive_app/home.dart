@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart' hide Factory;
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
-import 'package:rive/rive.dart' hide LinearGradient;
+import 'package:rive/rive.dart' hide Animation;
 import 'dart:math' as math;
 import 'package:flutter_samples/samples/ui/rive_app/navigation/custom_tab_bar.dart';
 import 'package:flutter_samples/samples/ui/rive_app/navigation/home_tab_view.dart';
@@ -36,7 +37,12 @@ class _RiveAppHomeState extends State<RiveAppHome>
   late Animation<double> _onBoardingAnim;
   late Animation<double> _sidebarAnim;
 
-  late SMIBool _menuBtn;
+  late final iconsFileLoader = FileLoader.fromAsset(
+    app_assets.iconsRiv,
+    riveFactory: Factory.rive,
+  );
+  late final menuBtnFileLoader = FileLoader.fromAsset(app_assets.menuButtonRiv, riveFactory: Factory.rive);
+  BooleanInput? _menuBtn;
 
   bool _showOnBoarding = false;
   Widget _tabBody = Container(color: RiveAppTheme.background);
@@ -54,12 +60,9 @@ class _RiveAppHomeState extends State<RiveAppHome>
     damping: 5,
   );
 
-  void _onMenuIconInit(Artboard artboard) {
-    final controller =
-        StateMachineController.fromArtboard(artboard, "State Machine");
-    artboard.addController(controller!);
-    _menuBtn = controller.findInput<bool>("isOpen") as SMIBool;
-    _menuBtn.value = true;
+  void _onMenuIconInit(RiveWidgetController controller) {
+    _menuBtn = controller.stateMachine.boolean('isOpen');
+    _menuBtn?.value = true;
   }
 
   void _presentOnBoarding(bool show) {
@@ -79,15 +82,17 @@ class _RiveAppHomeState extends State<RiveAppHome>
   }
 
   void onMenuPress() {
-    if (_menuBtn.value) {
+    if (_menuBtn == null) return;
+
+    if (_menuBtn?.value == true) {
       final springAnim = SpringSimulation(springDesc, 0, 1, 0);
       _animationController?.animateWith(springAnim);
     } else {
       _animationController?.reverse();
     }
-    _menuBtn.change(!_menuBtn.value);
+    _menuBtn?.value = !_menuBtn!.value;
 
-    SystemChrome.setSystemUIOverlayStyle(_menuBtn.value
+    SystemChrome.setSystemUIOverlayStyle(_menuBtn!.value
         ? SystemUiOverlayStyle.dark
         : SystemUiOverlayStyle.light);
   }
@@ -123,6 +128,9 @@ class _RiveAppHomeState extends State<RiveAppHome>
   void dispose() {
     _animationController?.dispose();
     _onBoardingAnimController?.dispose();
+    _menuBtn?.dispose();
+    menuBtnFileLoader.dispose();
+    iconsFileLoader.dispose();
     super.dispose();
   }
 
@@ -153,7 +161,7 @@ class _RiveAppHomeState extends State<RiveAppHome>
               },
               child: FadeTransition(
                 opacity: _sidebarAnim,
-                child: const SideMenu(),
+                child: SideMenu(fileLoader: iconsFileLoader),
               ),
             ),
           ),
@@ -249,11 +257,18 @@ class _RiveAppHomeState extends State<RiveAppHome>
                         )
                       ],
                     ),
-                    child: RiveAnimation.asset(
-                      app_assets.menuButtonRiv,
-                      stateMachines: const ["State Machine"],
-                      animations: const ["open", "close"],
-                      onInit: _onMenuIconInit,
+                    child: RiveWidgetBuilder(
+                      fileLoader: menuBtnFileLoader,
+                      onLoaded: (state) => _onMenuIconInit(state.controller),
+                      builder: (context, state) {
+                        if (state is RiveLoaded) {
+                          return RiveWidget(controller: state.controller);
+                        }
+                        if (state is RiveFailed && kDebugMode) {
+                          debugPrint('Rive failed: ${state.error}');
+                        }
+                        return const SizedBox.shrink();
+                      },
                     ),
                   ),
                 ),
@@ -348,6 +363,7 @@ class _RiveAppHomeState extends State<RiveAppHome>
             alignment: Alignment.center,
             children: [
               CustomTabBar(
+                fileLoader: iconsFileLoader,
                 onTabChange: (tabIndex) {
                   setState(() {
                     _tabBody = _screens[tabIndex];

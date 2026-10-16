@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter_samples/samples/ui/rive_app/components/menu_row.dart';
 import 'package:flutter_samples/samples/ui/rive_app/models/menu_item.dart';
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
-import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({super.key});
+  const SideMenu({super.key, required this.fileLoader});
+
+  final FileLoader fileLoader;
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -20,12 +22,8 @@ class _SideMenuState extends State<SideMenu> {
   String _selectedMenu = MenuItemModel.menuItems[0].title;
   bool _isDarkMode = false;
 
-  void onThemeRiveIconInit(Artboard artboard) {
-    final controller = StateMachineController.fromArtboard(
-        artboard, _themeMenuIcon[0].riveIcon.stateMachine);
-    artboard.addController(controller!);
-    _themeMenuIcon[0].riveIcon.status =
-        controller.findInput<bool>("active") as SMIBool;
+  void onThemeRiveIconInit(RiveWidgetController controller) {
+    _themeMenuIcon[0].riveIcon.status = controller.stateMachine.boolean("active");
   }
 
   void onMenuPress(MenuItemModel menu) {
@@ -38,7 +36,14 @@ class _SideMenuState extends State<SideMenu> {
     setState(() {
       _isDarkMode = value;
     });
-    _themeMenuIcon[0].riveIcon.status!.change(value);
+    _themeMenuIcon[0].riveIcon.status?.value = value;
+  }
+
+  @override
+  void dispose() {
+    _themeMenuIcon[0].riveIcon.status?.dispose();
+    _themeMenuIcon[0].riveIcon.status = null;
+    super.dispose();
   }
 
   @override
@@ -97,11 +102,13 @@ class _SideMenuState extends State<SideMenu> {
                       title: "BROWSE",
                       selectedMenu: _selectedMenu,
                       menuIcons: _browseMenuIcons,
+                      fileLoader: widget.fileLoader,
                       onMenuPress: onMenuPress),
                   MenuButtonSection(
                       title: "HISTORY",
                       selectedMenu: _selectedMenu,
                       menuIcons: _historyMenuIcons,
+                      fileLoader: widget.fileLoader,
                       onMenuPress: onMenuPress),
                 ],
               ),
@@ -116,11 +123,25 @@ class _SideMenuState extends State<SideMenu> {
                 height: 32,
                 child: Opacity(
                   opacity: 0.6,
-                  child: RiveAnimation.asset(
-                    app_assets.iconsRiv,
-                    stateMachines: [_themeMenuIcon[0].riveIcon.stateMachine],
-                    artboard: _themeMenuIcon[0].riveIcon.artboard,
-                    onInit: onThemeRiveIconInit,
+                  child: RiveWidgetBuilder(
+                    fileLoader: widget.fileLoader,
+                    stateMachineSelector: StateMachineSelector.byName(
+                      _themeMenuIcon[0].riveIcon.stateMachine,
+                    ),
+                    artboardSelector: ArtboardSelector.byName(
+                      _themeMenuIcon[0].riveIcon.artboard,
+                    ),
+                    onLoaded: (state) =>
+                        onThemeRiveIconInit(state.controller),
+                    builder: (context, state) {
+                      if (state is RiveLoaded) {
+                        return RiveWidget(controller: state.controller);
+                      }
+                      if (state is RiveFailed && kDebugMode) {
+                        debugPrint('Rive failed: ${state.error}');
+                      }
+                      return const SizedBox.shrink();
+                    },
                   ),
                 ),
               ),
@@ -149,12 +170,14 @@ class MenuButtonSection extends StatelessWidget {
       {super.key,
       required this.title,
       required this.menuIcons,
+      required this.fileLoader,
       this.selectedMenu = "Home",
       this.onMenuPress});
 
   final String title;
   final String selectedMenu;
   final List<MenuItemModel> menuIcons;
+  final FileLoader fileLoader;
   final Function(MenuItemModel menu)? onMenuPress;
 
   @override
@@ -188,6 +211,7 @@ class MenuButtonSection extends StatelessWidget {
                 MenuRow(
                   menu: menu,
                   selectedMenu: selectedMenu,
+                  fileLoader: fileLoader,
                   onMenuPress: () => onMenuPress!(menu),
                 ),
               ]

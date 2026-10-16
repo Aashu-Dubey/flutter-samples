@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart' hide LinearGradient;
+import 'package:rive/rive.dart';
 import 'package:flutter_samples/samples/ui/rive_app/models/tab_item.dart';
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
-import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
 class CustomTabBar extends StatefulWidget {
-  const CustomTabBar({super.key, required this.onTabChange});
+  const CustomTabBar({super.key, required this.onTabChange, required this.fileLoader});
 
   final Function(int tabIndex) onTabChange;
+  final FileLoader fileLoader;
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();
@@ -19,12 +20,8 @@ class _CustomTabBarState extends State<CustomTabBar> {
 
   int _selectedTab = 0;
 
-  void _onRiveIconInit(Artboard artboard, index) {
-    final controller = StateMachineController.fromArtboard(
-        artboard, _icons[index].stateMachine);
-    artboard.addController(controller!);
-
-    _icons[index].status = controller.findInput<bool>("active") as SMIBool;
+  void _onRiveIconInit(RiveWidgetController controller, index) {
+    _icons[index].status = controller.stateMachine.boolean("active");
   }
 
   void onTabPress(int index) {
@@ -34,11 +31,20 @@ class _CustomTabBarState extends State<CustomTabBar> {
       });
       widget.onTabChange(index);
 
-      _icons[index].status!.change(true);
+      _icons[index].status?.value = true;
       Future.delayed(const Duration(seconds: 1), () {
-        _icons[index].status!.change(false);
+        _icons[index].status?.value = false;
       });
     }
+  }
+
+  @override
+  void dispose() {
+    for (var icon in _icons) {
+      icon.status?.dispose();
+      icon.status = null;
+    }
+    super.dispose();
   }
 
   @override
@@ -100,12 +106,24 @@ class _CustomTabBarState extends State<CustomTabBar> {
                           SizedBox(
                             height: 36,
                             width: 36,
-                            child: RiveAnimation.asset(
-                              app_assets.iconsRiv,
-                              stateMachines: [icon.stateMachine],
-                              artboard: icon.artboard,
-                              onInit: (artboard) {
-                                _onRiveIconInit(artboard, index);
+                            child: RiveWidgetBuilder(
+                              fileLoader: widget.fileLoader,
+                              stateMachineSelector: StateMachineSelector.byName(
+                                icon.stateMachine,
+                              ),
+                              artboardSelector: ArtboardSelector.byName(
+                                icon.artboard,
+                              ),
+                              onLoaded: (state) =>
+                                  _onRiveIconInit(state.controller, index),
+                              builder: (context, state) {
+                                if (state is RiveLoaded) {
+                                  return RiveWidget(controller: state.controller);
+                                }
+                                if (state is RiveFailed && kDebugMode) {
+                                  debugPrint('Rive failed: ${state.error}');
+                                }
+                                return const SizedBox.shrink();
                               },
                             ),
                           )

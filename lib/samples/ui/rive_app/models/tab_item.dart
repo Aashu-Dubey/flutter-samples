@@ -11,7 +11,7 @@ class TabItem {
   UniqueKey? id = UniqueKey();
   String stateMachine;
   String artboard;
-  late SMIBool? status;
+  BooleanInput? status;
 
   static List<TabItem> tabItemsList = [
     TabItem(stateMachine: "CHAT_Interactivity", artboard: "CHAT"),
