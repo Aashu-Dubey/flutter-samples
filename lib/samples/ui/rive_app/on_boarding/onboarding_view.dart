@@ -1,5 +1,6 @@
 import 'dart:ui';
-import 'package:flutter/cupertino.dart' hide Image;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' hide Factory;
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:rive/rive.dart';
@@ -47,7 +48,10 @@ class _OnBoardingViewState extends State<OnBoardingView>
   }
 
   void initRiveAssets() async {
-    shapesFile = (await File.asset(app_assets.shapesRiv, riveFactory: Factory.rive))!;
+    // The shapes artboard sits under an ImageFiltered blur. Flutter image
+    // filters cannot reach a Rive render texture (a platform view on web), so
+    // the blur only applies with the Flutter renderer.
+    shapesFile = (await File.asset(app_assets.shapesRiv, riveFactory: kIsWeb ? Factory.flutter : Factory.rive))!;
     shapesPainter = SingleAnimationPainter('Animation 1');
     shapesArtboard = shapesFile.defaultArtboard();
 
@@ -67,6 +71,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
     initBtnPainer();
     
     Future.delayed(const Duration(milliseconds: 800), () {
+      if (!mounted) return;
       final springAnim = SpringSimulation(springDesc, 0, 1, 0);
       _signInAnimController?.animateWith(springAnim);
     });
@@ -77,12 +82,15 @@ class _OnBoardingViewState extends State<OnBoardingView>
   void dispose() {
     _signInAnimController?.dispose();
 
-    file.dispose();
-    shapesFile.dispose();
-    artboard?.dispose();
-    shapesArtboard?.dispose();
     painter.dispose();
     shapesPainter.dispose();
+    artboard?.dispose();
+    shapesArtboard?.dispose();
+    file.dispose();
+    shapesFile.dispose();
+    // Web-only: purges the pooled render textures (and the WebGL contexts they
+    // keep alive) left behind by the sheet; a no-op on other platforms.
+    RiveNative.instance.releaseRenderResources();
     super.dispose();
   }
 

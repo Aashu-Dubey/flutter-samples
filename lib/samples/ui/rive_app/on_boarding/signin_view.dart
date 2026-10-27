@@ -68,10 +68,12 @@ class _SignInViewState extends State<SignInView> {
     bool isValid = isEmailValid && isPassValid;
 
     Future.delayed(const Duration(seconds: 1), () {
+      if (!mounted) return;
       isValid ? _successAnim?.fire() : _errorAnim?.fire();
     });
 
     Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
       _resetAnim?.fire();
       setState(() {
         _isLoading = false;
@@ -81,6 +83,7 @@ class _SignInViewState extends State<SignInView> {
 
     if (isValid) {
       Future.delayed(const Duration(seconds: 4), () {
+      if (!mounted) return;
         widget.closeModal!();
         _emailController.text = "";
         _passController.text = "";
@@ -254,56 +257,65 @@ class _SignInViewState extends State<SignInView> {
                 Positioned.fill(
                   child: IgnorePointer(
                     ignoring: true,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        if (_isLoading)
-                          SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: RiveWidgetBuilder(
-                              fileLoader: checkFileLoader,
-                              onLoaded: (state) =>
-                                  _onCheckRiveInit(state.controller),
-                              builder: (context, state) {
-                                if (state is RiveLoaded) {
-                                  return RiveWidget(
-                                    controller: state.controller,
-                                  );
-                                }
-                                if (state is RiveFailed && kDebugMode) {
-                                  debugPrint('Rive failed: ${state.error}');
-                                }
-                                return const SizedBox.shrink();
-                              },
+                    child: RivePanel(
+                      // One screen-density surface for both graphics. The 3x transform on the
+                      // confetti is applied while drawing, so it stays sharp without layout(scale: 3).
+                      renderResolution: .layout(),
+                      child: Stack(
+                        children: [
+                          if (_isLoading)
+                            // Because of parent RivePanel, direct alignment property on Stack isn't respected
+                            Center(
+                              child: SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: RiveWidgetBuilder(
+                                  fileLoader: checkFileLoader,
+                                  onLoaded: (state) =>
+                                      _onCheckRiveInit(state.controller),
+                                  builder: (context, state) {
+                                    if (state is RiveLoaded) {
+                                      return RiveWidget(
+                                        controller: state.controller,
+                                        useSharedTexture: true,
+                                      );
+                                    }
+                                    if (state is RiveFailed && kDebugMode) {
+                                      debugPrint('Rive failed: ${state.error}');
+                                    }
+                                    return const SizedBox.shrink();
+                                  },
+                                ),
+                              ),
                             ),
-                          ),
-                        Positioned.fill(
-                          child: SizedBox(
-                            width: 500,
-                            height: 500,
-                            child: Transform.scale(
-                              scale: 3,
-                              child: RiveWidgetBuilder(
-                                fileLoader: confettiFileLoader,
-                                onLoaded: (state) =>
-                                    _onConfettiRiveInit(state.controller),
-                                builder: (context, state) {
-                                  if (state is RiveLoaded) {
-                                    return RiveWidget(
-                                      controller: state.controller,
-                                    );
-                                  }
-                                  if (state is RiveFailed && kDebugMode) {
-                                    debugPrint('Rive failed: ${state.error}');
-                                  }
-                                  return const SizedBox.shrink();
-                                },
+                          Positioned.fill(
+                            child: SizedBox(
+                              width: 500,
+                              height: 500,
+                              child: Transform.scale(
+                                scale: 3,
+                                child: RiveWidgetBuilder(
+                                  fileLoader: confettiFileLoader,
+                                  onLoaded: (state) =>
+                                      _onConfettiRiveInit(state.controller),
+                                  builder: (context, state) {
+                                    if (state is RiveLoaded) {
+                                      return RiveWidget(
+                                        controller: state.controller,
+                                        useSharedTexture: true,
+                                      );
+                                    }
+                                    if (state is RiveFailed && kDebugMode) {
+                                      debugPrint('Rive failed: ${state.error}');
+                                    }
+                                    return const SizedBox.shrink();
+                                  },
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

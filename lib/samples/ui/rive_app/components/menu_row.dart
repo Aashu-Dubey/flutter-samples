@@ -82,7 +82,16 @@ class _MenuRow extends State<MenuRow> {
                     onLoaded: (state) => _onMenuIconInit(state.controller),
                     builder: (context, state) {
                       if (state is RiveLoaded) {
-                        return RiveWidget(controller: state.controller);
+                        return RiveWidget(
+                          controller: state.controller,
+                          // Constant texture size: the drawer animates with
+                          // rotateY, which changes the ancestor scale and makes
+                          // the default display() policy reallocate on first
+                          // open, causing a visible icon flicker on Android.
+                          // Factory.flutter would avoid textures altogether.
+                          renderResolution: .layout(),
+                          hitTestBehavior: .none,
+                        );
                       }
                       if (state is RiveFailed && kDebugMode) {
                         debugPrint('Rive failed: ${state.error}');

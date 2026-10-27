@@ -37,9 +37,15 @@ class _RiveAppHomeState extends State<RiveAppHome>
   late Animation<double> _onBoardingAnim;
   late Animation<double> _sidebarAnim;
 
+  // These 12 icons are Flutter UI (tab bar and side menu), not content
+  // graphics: they only need Flutter opacity/transforms and no
+  // Rive-renderer-specific features. Each Factory.rive widget owns a render
+  // texture, which is a WebGL context on web (browsers cap those at ~16), so
+  // paint these with the Flutter renderer on web. On the other platforms the
+  // Rive renderer already works and there is no context limit, so keep it.
   late final iconsFileLoader = FileLoader.fromAsset(
     app_assets.iconsRiv,
-    riveFactory: Factory.rive,
+    riveFactory: kIsWeb ? Factory.flutter : Factory.rive,
   );
   late final menuBtnFileLoader = FileLoader.fromAsset(app_assets.menuButtonRiv, riveFactory: Factory.rive);
   BooleanInput? _menuBtn;

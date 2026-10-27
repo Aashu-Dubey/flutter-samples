@@ -135,7 +135,14 @@ class _SideMenuState extends State<SideMenu> {
                         onThemeRiveIconInit(state.controller),
                     builder: (context, state) {
                       if (state is RiveLoaded) {
-                        return RiveWidget(controller: state.controller);
+                        return RiveWidget(
+                          controller: state.controller,
+                          // Same reason as the MenuRow icons: this icon sits in
+                          // the rotateY-animated drawer, so a fixed texture size
+                          // avoids the first-open reallocation and flicker on Android.
+                          renderResolution: .layout(),
+                          hitTestBehavior: .none,
+                        );
                       }
                       if (state is RiveFailed && kDebugMode) {
                         debugPrint('Rive failed: ${state.error}');
