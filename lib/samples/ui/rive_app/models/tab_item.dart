@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 
 class TabItem {
   TabItem({
@@ -11,7 +11,7 @@ class TabItem {
   UniqueKey? id = UniqueKey();
   String stateMachine;
   String artboard;
-  BooleanInput? status;
+  rive.BooleanInput? status;
 
   static List<TabItem> tabItemsList = [
     TabItem(stateMachine: "CHAT_Interactivity", artboard: "CHAT"),

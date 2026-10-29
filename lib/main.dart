@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:flutter_samples/models/samples.dart';
 import 'package:flutter_samples/samples/animations/animation_samples_list.dart';
 import 'package:flutter_samples/samples/animations/custom_caret/custom_caret.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_samples/samples/animations/grid_magnification/grid_magni
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Call init before using Rive.
-  await RiveNative.init();
+  await rive.RiveNative.init();
   runApp(const MyApp());
 }
 

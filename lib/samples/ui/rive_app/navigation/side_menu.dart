@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:flutter_samples/samples/ui/rive_app/components/menu_row.dart';
 import 'package:flutter_samples/samples/ui/rive_app/models/menu_item.dart';
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 class SideMenu extends StatefulWidget {
   const SideMenu({super.key, required this.fileLoader});
 
-  final FileLoader fileLoader;
+  final rive.FileLoader fileLoader;
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -22,7 +22,7 @@ class _SideMenuState extends State<SideMenu> {
   String _selectedMenu = MenuItemModel.menuItems[0].title;
   bool _isDarkMode = false;
 
-  void onThemeRiveIconInit(RiveWidgetController controller) {
+  void onThemeRiveIconInit(rive.RiveWidgetController controller) {
     _themeMenuIcon[0].riveIcon.status = controller.stateMachine.boolean("active");
   }
 
@@ -123,19 +123,19 @@ class _SideMenuState extends State<SideMenu> {
                 height: 32,
                 child: Opacity(
                   opacity: 0.6,
-                  child: RiveWidgetBuilder(
+                  child: rive.RiveWidgetBuilder(
                     fileLoader: widget.fileLoader,
-                    stateMachineSelector: StateMachineSelector.byName(
+                    stateMachineSelector: rive.StateMachineSelector.byName(
                       _themeMenuIcon[0].riveIcon.stateMachine,
                     ),
-                    artboardSelector: ArtboardSelector.byName(
+                    artboardSelector: rive.ArtboardSelector.byName(
                       _themeMenuIcon[0].riveIcon.artboard,
                     ),
                     onLoaded: (state) =>
                         onThemeRiveIconInit(state.controller),
                     builder: (context, state) {
-                      if (state is RiveLoaded) {
-                        return RiveWidget(
+                      if (state is rive.RiveLoaded) {
+                        return rive.RiveWidget(
                           controller: state.controller,
                           // Same reason as the MenuRow icons: this icon sits in
                           // the rotateY-animated drawer, so a fixed texture size
@@ -144,7 +144,7 @@ class _SideMenuState extends State<SideMenu> {
                           hitTestBehavior: .none,
                         );
                       }
-                      if (state is RiveFailed && kDebugMode) {
+                      if (state is rive.RiveFailed && kDebugMode) {
                         debugPrint('Rive failed: ${state.error}');
                       }
                       return const SizedBox.shrink();
@@ -184,7 +184,7 @@ class MenuButtonSection extends StatelessWidget {
   final String title;
   final String selectedMenu;
   final List<MenuItemModel> menuIcons;
-  final FileLoader fileLoader;
+  final rive.FileLoader fileLoader;
   final Function(MenuItemModel menu)? onMenuPress;
 
   @override

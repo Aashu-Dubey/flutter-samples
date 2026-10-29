@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart' hide Factory;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
 
@@ -18,19 +18,19 @@ class _SignInViewState extends State<SignInView> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
 
-  late final checkFileLoader = FileLoader.fromAsset(
+  late final checkFileLoader = rive.FileLoader.fromAsset(
     app_assets.checkRiv,
-    riveFactory: Factory.rive,
+    riveFactory: rive.Factory.rive,
   );
-  late final confettiFileLoader = FileLoader.fromAsset(
+  late final confettiFileLoader = rive.FileLoader.fromAsset(
     app_assets.confettiRiv,
-    riveFactory: Factory.rive,
+    riveFactory: rive.Factory.rive,
   );
 
-  TriggerInput? _successAnim;
-  TriggerInput? _errorAnim;
-  TriggerInput? _resetAnim;
-  TriggerInput? _confettiAnim;
+  rive.TriggerInput? _successAnim;
+  rive.TriggerInput? _errorAnim;
+  rive.TriggerInput? _resetAnim;
+  rive.TriggerInput? _confettiAnim;
 
   bool _isLoading = false;
 
@@ -48,13 +48,13 @@ class _SignInViewState extends State<SignInView> {
     super.dispose();
   }
 
-  void _onCheckRiveInit(RiveWidgetController controller) {
+  void _onCheckRiveInit(rive.RiveWidgetController controller) {
     _successAnim = controller.stateMachine.trigger("Check");
     _errorAnim = controller.stateMachine.trigger("Error");
     _resetAnim = controller.stateMachine.trigger("Reset");
   }
 
-  void _onConfettiRiveInit(RiveWidgetController controller) {
+  void _onConfettiRiveInit(rive.RiveWidgetController controller) {
     _confettiAnim = controller.stateMachine.trigger("Trigger explosion");
   }
 
@@ -257,7 +257,7 @@ class _SignInViewState extends State<SignInView> {
                 Positioned.fill(
                   child: IgnorePointer(
                     ignoring: true,
-                    child: RivePanel(
+                    child: rive.RivePanel(
                       // One screen-density surface for both graphics. The 3x transform on the
                       // confetti is applied while drawing, so it stays sharp without layout(scale: 3).
                       renderResolution: .layout(),
@@ -269,18 +269,18 @@ class _SignInViewState extends State<SignInView> {
                               child: SizedBox(
                                 width: 100,
                                 height: 100,
-                                child: RiveWidgetBuilder(
+                                child: rive.RiveWidgetBuilder(
                                   fileLoader: checkFileLoader,
                                   onLoaded: (state) =>
                                       _onCheckRiveInit(state.controller),
                                   builder: (context, state) {
-                                    if (state is RiveLoaded) {
-                                      return RiveWidget(
+                                    if (state is rive.RiveLoaded) {
+                                      return rive.RiveWidget(
                                         controller: state.controller,
                                         useSharedTexture: true,
                                       );
                                     }
-                                    if (state is RiveFailed && kDebugMode) {
+                                    if (state is rive.RiveFailed && kDebugMode) {
                                       debugPrint('Rive failed: ${state.error}');
                                     }
                                     return const SizedBox.shrink();
@@ -294,18 +294,18 @@ class _SignInViewState extends State<SignInView> {
                               height: 500,
                               child: Transform.scale(
                                 scale: 3,
-                                child: RiveWidgetBuilder(
+                                child: rive.RiveWidgetBuilder(
                                   fileLoader: confettiFileLoader,
                                   onLoaded: (state) =>
                                       _onConfettiRiveInit(state.controller),
                                   builder: (context, state) {
-                                    if (state is RiveLoaded) {
-                                      return RiveWidget(
+                                    if (state is rive.RiveLoaded) {
+                                      return rive.RiveWidget(
                                         controller: state.controller,
                                         useSharedTexture: true,
                                       );
                                     }
-                                    if (state is RiveFailed && kDebugMode) {
+                                    if (state is rive.RiveFailed && kDebugMode) {
                                       debugPrint('Rive failed: ${state.error}');
                                     }
                                     return const SizedBox.shrink();

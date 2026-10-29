@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart' hide Factory;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 import 'package:flutter_samples/samples/ui/rive_app/on_boarding/signin_view.dart';
 import 'package:flutter_samples/samples/ui/rive_app/assets.dart' as app_assets;
@@ -23,12 +23,12 @@ class _OnBoardingViewState extends State<OnBoardingView>
   // Animation controller that shows the sign up modal as well as translateY boarding content together
   AnimationController? _signInAnimController;
 
-  late File file;
-  late File shapesFile;
-  Artboard? artboard;
-  Artboard? shapesArtboard;
-  late SingleAnimationPainter painter;
-  late SingleAnimationPainter shapesPainter;
+  late rive.File file;
+  late rive.File shapesFile;
+  rive.Artboard? artboard;
+  rive.Artboard? shapesArtboard;
+  late rive.SingleAnimationPainter painter;
+  late rive.SingleAnimationPainter shapesPainter;
 
   final springDesc = SpringDescription(
     mass: 0.1,
@@ -51,17 +51,17 @@ class _OnBoardingViewState extends State<OnBoardingView>
     // The shapes artboard sits under an ImageFiltered blur. Flutter image
     // filters cannot reach a Rive render texture (a platform view on web), so
     // the blur only applies with the Flutter renderer.
-    shapesFile = (await File.asset(app_assets.shapesRiv, riveFactory: kIsWeb ? Factory.flutter : Factory.rive))!;
-    shapesPainter = SingleAnimationPainter('Animation 1');
+    shapesFile = (await rive.File.asset(app_assets.shapesRiv, riveFactory: kIsWeb ? rive.Factory.flutter : rive.Factory.rive))!;
+    shapesPainter = rive.SingleAnimationPainter('Animation 1');
     shapesArtboard = shapesFile.defaultArtboard();
 
-    file = (await File.asset(app_assets.buttonRiv, riveFactory: Factory.rive))!;
+    file = (await rive.File.asset(app_assets.buttonRiv, riveFactory: rive.Factory.rive))!;
     initBtnPainer();
     setState(() {});
   }
 
   void initBtnPainer() {
-    painter = SingleAnimationPainter('active', fit: Fit.cover);
+    painter = rive.SingleAnimationPainter('active', fit: rive.Fit.cover);
     artboard = file.defaultArtboard();
   }
 
@@ -90,7 +90,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
     shapesFile.dispose();
     // Web-only: purges the pooled render textures (and the WebGL contexts they
     // keep alive) left behind by the sheet; a no-op on other platforms.
-    RiveNative.instance.releaseRenderResources();
+    rive.RiveNative.instance.releaseRenderResources();
     super.dispose();
   }
 
@@ -114,7 +114,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
         if (shapesArtboard != null)
           ImageFiltered(
             imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-            child: RiveArtboardWidget(
+            child: rive.RiveArtboardWidget(
               artboard: shapesArtboard!,
               painter: shapesPainter,
             ),
@@ -179,7 +179,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
                         child: Stack(
                           children: [
                             if (artboard != null)
-                              RiveArtboardWidget(
+                              rive.RiveArtboardWidget(
                                 artboard: artboard!,
                                 painter: painter,
                               ),

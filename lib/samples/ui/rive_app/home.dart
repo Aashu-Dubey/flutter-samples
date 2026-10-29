@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart' hide Factory;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
-import 'package:rive/rive.dart' hide Animation;
+import 'package:rive/rive.dart' as rive;
 import 'dart:math' as math;
 import 'package:flutter_samples/samples/ui/rive_app/navigation/custom_tab_bar.dart';
 import 'package:flutter_samples/samples/ui/rive_app/navigation/home_tab_view.dart';
@@ -43,12 +43,12 @@ class _RiveAppHomeState extends State<RiveAppHome>
   // texture, which is a WebGL context on web (browsers cap those at ~16), so
   // paint these with the Flutter renderer on web. On the other platforms the
   // Rive renderer already works and there is no context limit, so keep it.
-  late final iconsFileLoader = FileLoader.fromAsset(
+  late final iconsFileLoader = rive.FileLoader.fromAsset(
     app_assets.iconsRiv,
-    riveFactory: kIsWeb ? Factory.flutter : Factory.rive,
+    riveFactory: kIsWeb ? rive.Factory.flutter : rive.Factory.rive,
   );
-  late final menuBtnFileLoader = FileLoader.fromAsset(app_assets.menuButtonRiv, riveFactory: Factory.rive);
-  BooleanInput? _menuBtn;
+  late final menuBtnFileLoader = rive.FileLoader.fromAsset(app_assets.menuButtonRiv, riveFactory: rive.Factory.rive);
+  rive.BooleanInput? _menuBtn;
 
   bool _showOnBoarding = false;
   Widget _tabBody = Container(color: RiveAppTheme.background);
@@ -66,7 +66,7 @@ class _RiveAppHomeState extends State<RiveAppHome>
     damping: 5,
   );
 
-  void _onMenuIconInit(RiveWidgetController controller) {
+  void _onMenuIconInit(rive.RiveWidgetController controller) {
     _menuBtn = controller.stateMachine.boolean('isOpen');
     _menuBtn?.value = true;
   }
@@ -263,14 +263,14 @@ class _RiveAppHomeState extends State<RiveAppHome>
                         )
                       ],
                     ),
-                    child: RiveWidgetBuilder(
+                    child: rive.RiveWidgetBuilder(
                       fileLoader: menuBtnFileLoader,
                       onLoaded: (state) => _onMenuIconInit(state.controller),
                       builder: (context, state) {
-                        if (state is RiveLoaded) {
-                          return RiveWidget(controller: state.controller);
+                        if (state is rive.RiveLoaded) {
+                          return rive.RiveWidget(controller: state.controller);
                         }
-                        if (state is RiveFailed && kDebugMode) {
+                        if (state is rive.RiveFailed && kDebugMode) {
                           debugPrint('Rive failed: ${state.error}');
                         }
                         return const SizedBox.shrink();

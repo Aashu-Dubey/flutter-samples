@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:flutter_samples/samples/ui/rive_app/models/tab_item.dart';
 import 'package:flutter_samples/samples/ui/rive_app/theme.dart';
 
@@ -9,7 +9,7 @@ class CustomTabBar extends StatefulWidget {
   const CustomTabBar({super.key, required this.onTabChange, required this.fileLoader});
 
   final Function(int tabIndex) onTabChange;
-  final FileLoader fileLoader;
+  final rive.FileLoader fileLoader;
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();
@@ -20,7 +20,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
 
   int _selectedTab = 0;
 
-  void _onRiveIconInit(RiveWidgetController controller, index) {
+  void _onRiveIconInit(rive.RiveWidgetController controller, index) {
     _icons[index].status = controller.stateMachine.boolean("active");
   }
 
@@ -106,26 +106,26 @@ class _CustomTabBarState extends State<CustomTabBar> {
                           SizedBox(
                             height: 36,
                             width: 36,
-                            child: RiveWidgetBuilder(
+                            child: rive.RiveWidgetBuilder(
                               fileLoader: widget.fileLoader,
-                              stateMachineSelector: StateMachineSelector.byName(
+                              stateMachineSelector: rive.StateMachineSelector.byName(
                                 icon.stateMachine,
                               ),
-                              artboardSelector: ArtboardSelector.byName(
+                              artboardSelector: rive.ArtboardSelector.byName(
                                 icon.artboard,
                               ),
                               onLoaded: (state) =>
                                   _onRiveIconInit(state.controller, index),
                               builder: (context, state) {
-                                if (state is RiveLoaded) {
-                                  return RiveWidget(
+                                if (state is rive.RiveLoaded) {
+                                  return rive.RiveWidget(
                                     controller: state.controller,
                                     // Added for consistency with the SideMenu icons
                                     renderResolution: .layout(),
                                     hitTestBehavior: .none,
                                   );
                                 }
-                                if (state is RiveFailed && kDebugMode) {
+                                if (state is rive.RiveFailed && kDebugMode) {
                                   debugPrint('Rive failed: ${state.error}');
                                 }
                                 return const SizedBox.shrink();

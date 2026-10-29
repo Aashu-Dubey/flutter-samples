@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:flutter_samples/samples/ui/rive_app/models/menu_item.dart';
 
 class MenuRow extends StatefulWidget {
@@ -16,14 +16,14 @@ class MenuRow extends StatefulWidget {
   final MenuItemModel menu;
   final String selectedMenu;
   final Function? onMenuPress;
-  final FileLoader fileLoader;
+  final rive.FileLoader fileLoader;
 
   @override
   State<MenuRow> createState() => _MenuRow();
 }
 
 class _MenuRow extends State<MenuRow> {
-  void _onMenuIconInit(RiveWidgetController controller) {
+  void _onMenuIconInit(rive.RiveWidgetController controller) {
     widget.menu.riveIcon.status = controller.stateMachine.boolean("active");
   }
 
@@ -71,18 +71,18 @@ class _MenuRow extends State<MenuRow> {
                 height: 32,
                 child: Opacity(
                   opacity: 0.6,
-                  child: RiveWidgetBuilder(
+                  child: rive.RiveWidgetBuilder(
                     fileLoader: widget.fileLoader,
-                    stateMachineSelector: StateMachineSelector.byName(
+                    stateMachineSelector: rive.StateMachineSelector.byName(
                       widget.menu.riveIcon.stateMachine,
                     ),
-                    artboardSelector: ArtboardSelector.byName(
+                    artboardSelector: rive.ArtboardSelector.byName(
                       widget.menu.riveIcon.artboard,
                     ),
                     onLoaded: (state) => _onMenuIconInit(state.controller),
                     builder: (context, state) {
-                      if (state is RiveLoaded) {
-                        return RiveWidget(
+                      if (state is rive.RiveLoaded) {
+                        return rive.RiveWidget(
                           controller: state.controller,
                           // Constant texture size: the drawer animates with
                           // rotateY, which changes the ancestor scale and makes
@@ -93,7 +93,7 @@ class _MenuRow extends State<MenuRow> {
                           hitTestBehavior: .none,
                         );
                       }
-                      if (state is RiveFailed && kDebugMode) {
+                      if (state is rive.RiveFailed && kDebugMode) {
                         debugPrint('Rive failed: ${state.error}');
                       }
                       return const SizedBox.shrink();
